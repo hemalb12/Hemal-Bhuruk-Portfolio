@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hemal Bhuruk | Game QA Analyst & Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & MIDNIGHT ENGINE PALETTE
+       ========================================================================== */
+    :root {
+      --bg-void: #0a0a12;
+      --bg-navy: #0f0f1e;
+      --bg-panel: #16162d;
+      --cyber-teal: #00f0d4;
+      --deep-violet: #7c3aed;
+      --text-main: #e8e8ff;
+      --text-muted: #8e8ea6;
+      --volt-green: #39ff14;
+      --hot-pink: #ff00ff;
+      --font-display: 'Orbitron', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Cyber Grid & Scanline Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 240, 212, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 212, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-header {
+      font-size: 1.8rem;
+      color: var(--cyber-teal);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(0, 240, 212, 0.2);
+      padding-bottom: 10px;
+    }
+
+    .section-header::before {
+      content: ">>";
+      font-family: var(--font-mono);
+      color: var(--deep-violet);
+    }
+
+    /* ==========================================================================
+       HUD NAVIGATION & BUG HUNT CONTROLS
+       ========================================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 18, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+      z-index: 100;
+      padding: 15px 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      color: var(--cyber-teal);
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyber-teal);
+    }
+
+    /* Bug Hunt Toggle Button */
+    .bug-toggle {
+      background: var(--bg-panel);
+      border: 1px solid var(--text-muted);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bug-toggle.active {
+      border-color: var(--volt-green);
+      color: var(--volt-green);
+      box-shadow: 0 0 12px rgba(57, 255, 20, 0.4);
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+      background: rgba(57, 255, 20, 0.15);
+      border-bottom: 2px solid var(--volt-green);
+      color: var(--volt-green);
+      font-family: var(--font-mono);
+      text-align: center;
+      padding: 10px;
+      font-size: 0.95rem;
+      display: none;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: 80px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      min-height: 80vh;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .terminal-tag {
+      font-family: var(--font-mono);
+      color: var(--cyber-teal);
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 240, 212, 0.3);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .hero-role {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      color: var(--deep-violet);
+      margin-bottom: 20px;
+      min-height: 1.8rem;
+    }
+
+    .type-cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: var(--cyber-teal);
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      max-width: 500px;
+    }
+
+    .stat-box {
+      background: var(--bg-navy);
+      border: 1px solid rgba(0, 240, 212, 0.2);
+      padding: 12px;
+      text-align: center;
+      position: relative;
+    }
+
+    .stat-box::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 6px; height: 6px;
+      border-top: 1px solid var(--cyber-teal);
+      border-left: 1px solid var(--cyber-teal);
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--cyber-teal);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* HUD Cyber Avatar */
+    .hero-avatar {
+      width: 320px;
+      height: 320px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-frame {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--deep-violet);
+      clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, rgba(10, 10, 18, 0.8) 70%);
+      box-shadow: inset 0 0 20px rgba(0, 240, 212, 0.1);
+    }
+
+    .avatar-inner {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--cyber-teal);
+      text-shadow: 0 0 15px var(--cyber-teal);
+      border: 1px dashed rgba(0, 240, 212, 0.4);
+      width: 80%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+    }
+
+    .avatar-sub {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-main);
+      margin-top: 10px;
+    }
+
+    /* ==========================================================================
+       ABOUT SECTION
+       ========================================================================== */
+    .about {
+      padding: 60px 0;
+    }
+
+    .about-panel {
+      background: var(--bg-navy);
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      padding: 30px;
+      position: relative;
+    }
+
+    .about-panel::after {
+      content: "STATUS: ACTIVE // AGENT_ID: HB-8821";
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      background: var(--bg-panel);
+      padding: 2px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--cyber-teal);
+      border: 1px solid var(--cyber-teal);
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    /* ==========================================================================
+       PROJECTS SECTION
+       ========================================================================== */
+    .projects {
+      padding: 60px 0;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .project-card {
+      background: var(--bg-navy);
+      border: 1px solid rgba(0, 240, 212, 0.2);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyber-teal);
+      box-shadow: 0 5px 15px rgba(0, 240, 212, 0.1);
+    }
+
+    .project-thumb {
+      height: 180px;
+      background: var(--bg-panel);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .thumb-1 { background: linear-gradient(45deg, #16162d, #2a1b4e); }
+    .thumb-2 { background: linear-gradient(45deg, #0f1e2e, #162d2a); }
+    .thumb-3 { background: linear-gradient(45deg, #2d1625, #1f162d); }
+
+    .project-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .launch-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      background: rgba(124, 58, 237, 0.3);
+      color: var(--text-main);
+      padding: 2px 6px;
+      border: 1px solid var(--deep-violet);
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      flex: 1;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .tech-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: rgba(0, 240, 212, 0.1);
+      color: var(--cyber-teal);
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 15px;
+    }
+
+    .btn-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-link:hover {
+      color: var(--cyber-teal);
+    }
+
+    /* ==========================================================================
+       SKILLS SECTION
+       ========================================================================== */
+    .skills {
+      padding: 60px 0;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .skill-category {
+      background: var(--bg-navy);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      padding: 20px;
+    }
+
+    .skill-category h3 {
+      font-size: 1.1rem;
+      color: var(--cyber-teal);
+      margin-bottom: 15px;
+      font-family: var(--font-mono);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-item {
+      background: var(--bg-panel);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .skill-item:hover {
+      border-color: var(--cyber-teal);
+      background: rgba(0, 240, 212, 0.05);
+    }
+
+    /* ==========================================================================
+       CONTACT SECTION
+       ========================================================================== */
+    .contact {
+      padding: 60px 0 100px;
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: var(--bg-navy);
+      border: 1px solid rgba(0, 240, 212, 0.3);
+      padding: 30px;
+    }
+
+    .contact-info h3 {
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .contact-links {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .contact-links li {
+      margin-bottom: 15px;
+      font-family: var(--font-mono);
+    }
+
+    .contact-links a {
+      color: var(--cyber-teal);
+      text-decoration: none;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg-panel);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      color: #fff;
+      font-family: var(--font-mono);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--cyber-teal);
+    }
+
+    .submit-btn {
+      background: transparent;
+      border: 1px solid var(--cyber-teal);
+      color: var(--cyber-teal);
+      padding: 10px 20px;
+      font-family: var(--font-display);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: var(--cyber-teal);
+      color: var(--bg-void);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       INTERACTIVE BUG HUNT GAMIFICATION STYLES
+       ========================================================================== */
+    /* Bug 1: Clipping Title */
+    @keyframes bugVibrate {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(-3px, 4px) rotate(-1deg); }
+      40% { transform: translate(3px, -2px) rotate(1deg); }
+      60% { transform: translate(-2px, 5px) rotate(0deg); }
+      80% { transform: translate(2px, -3px) rotate(-1deg); }
+      100% { transform: translate(0, 6px) rotate(0deg); }
+    }
+
+    .bug1-active {
+      animation: bugVibrate 0.15s infinite !important;
+      color: var(--hot-pink) !important;
+      text-shadow: 2px 2px 0px #00FFFF, -2px -2px 0px #FF00FF !important;
+      cursor: crosshair !important;
+      z-index: 50;
+    }
+
+    /* Bug 2: Missing Texture */
+    .bug2-active #project-thumb-2 {
+      background: repeating-linear-gradient(
+        45deg,
+        var(--hot-pink),
+        var(--hot-pink) 15px,
+        #000 15px,
+        #000 30px
+      ) !important;
+      cursor: crosshair !important;
+    }
+
+    .bug2-active #project-thumb-2 span {
+      display: none !important;
+    }
+
+    .asset-badge {
+      display: none;
+      background: var(--volt-green);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: bold;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border-radius: 2px;
+    }
+
+    /* Bug 3: T-Pose / Rotated Icon */
+    .bug3-active {
+      cursor: crosshair !important;
+      border-color: var(--hot-pink) !important;
+      color: var(--hot-pink) !important;
+    }
+
+    .bug3-active .skill-icon {
+      transform: rotate(90deg);
+      display: inline-block;
+      color: var(--hot-pink);
+    }
+
+    .skill-icon {
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Victory Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(10, 10, 18, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: var(--bg-navy);
+      border: 2px solid var(--volt-green);
+      padding: 40px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+      position: relative;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      color: var(--volt-green);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .modal-text {
+      font-family: var(--font-mono);
+      margin-bottom: 25px;
+      color: var(--text-main);
+    }
+
+    .modal-btn {
+      background: var(--volt-green);
+      color: #000;
+      font-family: var(--font-display);
+      font-weight: 800;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.2s;
+    }
+
+    .modal-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { flex-direction: column-reverse; text-align: center; }
+      .stats-grid { margin: 0 auto; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ALERT BANNER -->
+  <div id="alert-banner" class="alert-banner">
+    ⚠️ SYSTEM WARNING: 3 QA bugs have been introduced to this page. Find and patch them! [Found: <span id="bug-count">0</span>/3]
+  </div>
+
+  <!-- HEADER / NAVBAR -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo"><span>[QA_SYS]</span> HEMAL BHURUK</a>
+        <ul class="nav-links">
+          <li><a href="#about">// ABOUT</a></li>
+          <li><a href="#projects">// PROJECTS</a></li>
+          <li><a href="#skills">// SKILLS</a></li>
+          <li><a href="#contact">// CONTACT</a></li>
+        </ul>
+        <button id="bug-toggle-btn" class="bug-toggle" onclick="toggleBugHunt()">
+          BUG HUNT: OFF 🔘
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero container">
+    <div class="hero-content">
+      <span class="terminal-tag">> SYSTEM_READY: QUALITY ASSURANCE</span>
+      <h1 id="hero-title" onclick="patchBug1()">HEMAL BHURUK</h1>
+      <div class="hero-role" id="typed-text"></div>
+      <p>
+        Game Quality Assurance Analyst with 1.5+ years hands-on testing across PC, mobile, and web. Proven track record identifying 150+ critical bugs, improving test coverage by 35%, and reducing post-release defects by 40%.
+      </p>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number">150+</div>
+          <div class="stat-label">BUGS LOGGED</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">35%</div>
+          <div class="stat-label">COVERAGE BOOST</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">-40%</div>
+          <div class="stat-label">DEFECT REDUCTION</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-frame">
+        <div class="avatar-inner">
+          <span>HB</span>
+          <span class="avatar-sub">DEV // QA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ME SECTION -->
+  <section id="about" class="about container">
+    <h2 class="section-header">About Me</h2>
+    <div class="about-panel">
+      <p class="about-text">
+        I am a detail-obsessed Game QA Analyst bridging the gap between quality assurance and game development. Having tested major shipped AAA titles like <strong>XDefiant (Ubisoft)</strong> as well as engaging mobile games at <strong>S Club Games</strong>, I specialize in ensuring mechanics feel satisfying, balanced, and technically stable.
+      </p>
+      <p class="about-text">
+        With a strong background as a Unity game developer, I bring a deeper technical understanding to QA. This enables me to isolate complex reproduction steps, inspect core systems effectively, and collaborate seamlessly with engineers and designers in high-velocity Agile/Scrum environments using Jira.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="projects container">
+    <h2 class="section-header">Verified Projects & QA Logs</h2>
+    <div class="project-grid">
+      
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-thumb thumb-1">
+          <span>TIC TAC TOE: EMOJI</span>
+        </div>
+        <div class="project-content">
+          <div class="project-title">
+            Tic Tac Toe: Emoji Puzzle
+            <span class="launch-badge">LIVE</span>
+          </div>
+          <p class="project-desc">
+            Feature-rich mobile puzzle title featuring 500+ levels, 1000+ collectible emojis, daily challenges, and global leaderboards. Conducted functional, regression, and compatibility testing across varied Android OS specs.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-tag">Mobile QA</span>
+            <span class="tech-tag">Progression Testing</span>
+            <span class="tech-tag">Leaderboards</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="btn-link">[LIVE DEMO]</a>
+            <a href="#" class="btn-link">[TEST LOGS]</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 (Contains Bug 2 Target) -->
+      <div class="project-card" id="project-card-2" onclick="patchBug2()">
+        <div class="project-thumb thumb-2" id="project-thumb-2">
+          <span>SQUISHY DROP: ASMR</span>
+          <div id="asset-badge" class="asset-badge">Asset loaded!</div>
+        </div>
+        <div class="project-content">
+          <div class="project-title">
+            Squishy Drop: Relaxing ASMR
+            <span class="launch-badge">LAUNCHED JUN 2026</span>
+          </div>
+          <p class="project-desc">
+            Drop-and-merge casual game featuring 3D visuals, themed worlds, and satisfying merge physics. Validated gameplay balance, physics consistency, UI responsiveness, and executed strict launch validation testing.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-tag">Physics Validation</span>
+            <span class="tech-tag">Jira</span>
+            <span class="tech-tag">Exploratory</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="btn-link">[LIVE DEMO]</a>
+            <a href="#" class="btn-link">[TEST LOGS]</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-thumb thumb-3">
+          <span>TAP SQUARE JIGSAW</span>
+        </div>
+        <div class="project-content">
+          <div class="project-title">
+            Tap Square Jigsaw
+            <span class="launch-badge">LAUNCHED JUN 2026</span>
+          </div>
+          <p class="project-desc">
+            Relaxing tile rotation puzzle game with hand-painted watercolor scenes. Performed exploratory and regression testing on tile rotation mechanics, UI responsiveness, and pre-release stability validation.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-tag">UI/UX Testing</span>
+            <span class="tech-tag">Agile/Scrum</span>
+            <span class="tech-tag">Pre-Release QA</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="btn-link">[LIVE DEMO]</a>
+            <a href="#" class="btn-link">[TEST LOGS]</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="skills container">
+    <h2 class="section-header">Technical Skillsets</h2>
+    <div class="skills-grid">
+      
+      <!-- Category 1 -->
+      <div class="skill-category">
+        <h3>// QUALITY ASSURANCE</h3>
+        <div class="skill-list">
+          <div class="skill-item">Manual Testing</div>
+          <div class="skill-item">Functional & Regression</div>
+          <div class="skill-item">Exploratory & Compatibility</div>
+          <div class="skill-item">Cross-Platform (PC/Mobile/Web)</div>
+          <div class="skill-item">Test Case Design</div>
+          <div class="skill-item">UI/UX & Performance Testing</div>
+        </div>
+      </div>
+
+      <!-- Category 2 -->
+      <div class="skill-category">
+        <h3>// TEST MANAGEMENT</h3>
+        <div class="skill-list">
+          <div class="skill-item" id="bug3-target" onclick="patchBug3()">
+            <span class="skill-icon" id="skill-icon">⚙️</span> Jira (Advanced)
+          </div>
+          <div class="skill-item">Trello</div>
+          <div class="skill-item">Agile / Scrum Workflows</div>
+          <div class="skill-item">Test Cycle Management</div>
+          <div class="skill-item">Build & Release Testing</div>
+        </div>
+      </div>
+
+      <!-- Category 3 -->
+      <div class="skill-category">
+        <h3>// GAME QA & TECH</h3>
+        <div class="skill-list">
+          <div class="skill-item">Gameplay & Balance Validation</div>
+          <div class="skill-item">Level Design Testing</div>
+          <div class="skill-item">Player Experience (UX)</div>
+          <div class="skill-item">Game Mechanics Validation</div>
+          <div class="skill-item">Unity / Developer Background</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact container">
+    <h2 class="section-header">Establish Connection</h2>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>READY TO DEPLOY HIGH-QUALITY TITLES?</h3>
+        <p style="color: var(--text-muted);">Whether you need launch validation, rigorous regression cycles, or an experienced tester who speaks developer language, let's connect.</p>
+        <ul class="contact-links">
+          <li>📧 EMAIL: <a href="mailto:hemalbhuruk@example.com">hemal.bhuruk@qa-dev.com</a></li>
+          <li>🔗 LINKEDIN: <a href="#">linkedin.com/in/hemal-bhuruk</a></li>
+          <li>💻 GITHUB: <a href="#">github.com/hemal-bhuruk</a></li>
+          <li>📍 LOCATION: Mumbai, India</li>
+        </ul>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Transmission Sent! Hemal will reply shortly.');">
+        <div class="form-group">
+          <label>IDENTIFIER [NAME]</label>
+          <input type="text" class="form-control" placeholder="Enter your name..." required>
+        </div>
+        <div class="form-group">
+          <label>COMMS CHANNEL [EMAIL]</label>
+          <input type="email" class="form-control" placeholder="Enter your email..." required>
+        </div>
+        <div class="form-group">
+          <label>TRANSMISSION DATA [MESSAGE]</label>
+          <textarea class="form-control" rows="4" placeholder="Discussing QA opportunity..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">SEND TRANSMISSION >></button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      SYSTEM TERMINAL // DESIGNED & DEVELOPED FOR HEMAL BHURUK &copy; 2026 // ALL SYSTEMS NOMINAL
+    </div>
+  </footer>
+
+  <!-- VICTORY MODAL -->
+  <div id="victory-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-title">🏆 QUEST COMPLETE!</div>
+      <div class="modal-text">
+        You found all 3 QA defects. Your attention to detail is elite. Let's work together!
+      </div>
+      <button class="modal-btn" onclick="closeModalAndScroll()">PROCEED TO CONTACT >></button>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       TYPEWRITER EFFECT (HERO)
+       ========================================================================== */
+    const roles = ["Game Tester", "QA Analyst", "Unity Developer"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typedElem = document.getElementById("typed-text");
+
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typedElem.innerHTML = currentRole.substring(0, charIndex - 1) + '<span class="type-cursor"></span>';
+        charIndex--;
+      } else {
+        typedElem.innerHTML = currentRole.substring(0, charIndex + 1) + '<span class="type-cursor"></span>';
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 40 : 100;
+
+      if (!isDeleting && charIndex === currentRole.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        typeSpeed = 500;
+      }
+      setTimeout(typeEffect, typeSpeed);
+    }
+    document.addEventListener("DOMContentLoaded", typeEffect);
+
+    /* ==========================================================================
+       INTERACTIVE BUG HUNT GAMIFICATION LOGIC
+       ========================================================================== */
+    let bugHuntActive = false;
+    let bugsPatched = { bug1: false, bug2: false, bug3: false };
+
+    function toggleBugHunt() {
+      bugHuntActive = !bugHuntActive;
+      const btn = document.getElementById("bug-toggle-btn");
+      const banner = document.getElementById("alert-banner");
+
+      if (bugHuntActive) {
+        btn.innerHTML = "BUG HUNT: ON 🟢";
+        btn.classList.add("active");
+        banner.style.display = "block";
+        introduceBugs();
+      } else {
+        btn.innerHTML = "BUG HUNT: OFF 🔘";
+        btn.classList.remove("active");
+        banner.style.display = "none";
+        removeAllBugs();
+      }
+    }
+
+    function updateBugCount() {
+      const count = Object.values(bugsPatched).filter(Boolean).length;
+      document.getElementById("bug-count").innerText = count;
+      
+      if (count === 3 && bugHuntActive) {
+        setTimeout(() => {
+          document.getElementById("victory-modal").classList.add("show");
+        }, 300);
+      }
+    }
+
+    function introduceBugs() {
+      // Bug 1: Clipping Title
+      if (!bugsPatched.bug1) {
+        document.getElementById("hero-title").classList.add("bug1-active");
+      }
+      // Bug 2: Missing Texture
+      if (!bugsPatched.bug2) {
+        document.getElementById("project-card-2").classList.add("bug2-active");
+      }
+      // Bug 3: T-Pose Icon
+      if (!bugsPatched.bug3) {
+        document.getElementById("bug3-target").classList.add("bug3-active");
+      }
+    }
+
+    function removeAllBugs() {
+      document.getElementById("hero-title").classList.remove("bug1-active");
+      document.getElementById("project-card-2").classList.remove("bug2-active");
+      document.getElementById("bug3-target").classList.remove("bug3-active");
+    }
+
+    // Patch Handlers
+    function patchBug1() {
+      if (!bugHuntActive || bugsPatched.bug1) return;
+      document.getElementById("hero-title").classList.remove("bug1-active");
+      bugsPatched.bug1 = true;
+      updateBugCount();
+    }
+
+    function patchBug2() {
+      if (!bugHuntActive || bugsPatched.bug2) return;
+      document.getElementById("project-card-2").classList.remove("bug2-active");
+      document.getElementById("asset-badge").style.display = "inline-block";
+      document.getElementById("project-thumb-2").style.background = "#0f1e2e";
+      bugsPatched.bug2 = true;
+      updateBugCount();
+    }
+
+    function patchBug3() {
+      if (!bugHuntActive || bugsPatched.bug3) return;
+      document.getElementById("bug3-target").classList.remove("bug3-active");
+      bugsPatched.bug3 = true;
+      updateBugCount();
+    }
+
+    function closeModalAndScroll() {
+      document.getElementById("victory-modal").classList.remove("show");
+      document.getElementById("contact").scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
