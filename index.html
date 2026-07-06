@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hemal Bhuruk | Game QA Analyst & Developer</title>
+  <title>Hemal Bhuruk | Game QA Analyst</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   
   <style>
     /* ==========================================================================
-       DESIGN TOKENS & MIDNIGHT ENGINE PALETTE
+       DESIGN TOKENS — THE "ELECTRIC OASIS" PALETTE
        ========================================================================== */
     :root {
-      --bg-void: #0a0a12;
-      --bg-navy: #0f0f1e;
-      --bg-panel: #16162d;
-      --cyber-teal: #00f0d4;
-      --deep-violet: #7c3aed;
-      --text-main: #e8e8ff;
-      --text-muted: #8e8ea6;
-      --volt-green: #39ff14;
-      --hot-pink: #ff00ff;
+      --bg-main: #FAF5FF;          /* Primary (60%): Soft Lavender Pearl */
+      --bg-surface: #FFFFFF;       /* Crisp White for cards and elevated surfaces */
+      --bg-subtle: #F3E8FF;        /* Soft purple tint for badges/accents */
+      --text-main: #1E293B;        /* Secondary (30%): Corporate Charcoal */
+      --text-muted: #64748B;       /* Slate gray for secondary text */
+      --accent-cyan: #06B6D4;      /* Accent (10%): Cyber Cyan */
+      --accent-dark: #0891B2;      /* Deeper cyan for hover states */
+      --volt-green: #10B981;       /* Clean Emerald Green for active Bug Hunt state */
+      --hot-pink: #EC4899;         /* Vibrant Pink for QA glitch targets */
+      --border-light: rgba(30, 41, 59, 0.1);
+      
       --font-display: 'Orbitron', sans-serif;
       --font-mono: 'Share Tech Mono', monospace;
       --font-body: 'Inter', sans-serif;
@@ -34,7 +36,7 @@
     }
 
     body {
-      background-color: var(--bg-void);
+      background-color: var(--bg-main);
       color: var(--text-main);
       font-family: var(--font-body);
       line-height: 1.6;
@@ -42,28 +44,17 @@
       position: relative;
     }
 
-    /* Background Cyber Grid & Scanline Overlay */
+    /* Subtle High-Tech Blueprint Grid Overlay */
     body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background-image: 
-        linear-gradient(rgba(0, 240, 212, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 212, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
       pointer-events: none;
       z-index: 0;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-      background-size: 100% 4px, 6px 100%;
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.6;
     }
 
     .container {
@@ -78,37 +69,39 @@
     h1, h2, h3, h4 {
       font-family: var(--font-display);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
+      color: var(--text-main);
     }
 
     .section-header {
       font-size: 1.8rem;
-      color: var(--cyber-teal);
+      color: var(--text-main);
       margin-bottom: 2rem;
       display: flex;
       align-items: center;
       gap: 12px;
-      border-bottom: 1px solid rgba(0, 240, 212, 0.2);
+      border-bottom: 2px solid var(--border-light);
       padding-bottom: 10px;
     }
 
     .section-header::before {
-      content: ">>";
+      content: "//";
       font-family: var(--font-mono);
-      color: var(--deep-violet);
+      color: var(--accent-cyan);
+      font-weight: bold;
     }
 
     /* ==========================================================================
-       HUD NAVIGATION & BUG HUNT CONTROLS
+       NAVIGATION & BUG HUNT CONTROLS
        ========================================================================== */
     header {
       position: sticky;
       top: 0;
-      background: rgba(10, 10, 18, 0.85);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+      background: rgba(250, 245, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
       z-index: 100;
-      padding: 15px 0;
+      padding: 16px 0;
     }
 
     nav {
@@ -119,8 +112,8 @@
 
     .logo {
       font-family: var(--font-mono);
-      font-size: 1.2rem;
-      color: var(--cyber-teal);
+      font-size: 1.15rem;
+      color: var(--text-main);
       font-weight: 700;
       text-decoration: none;
       display: flex;
@@ -128,9 +121,13 @@
       gap: 8px;
     }
 
+    .logo span {
+      color: var(--accent-cyan);
+    }
+
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 24px;
       list-style: none;
       align-items: center;
     }
@@ -140,44 +137,49 @@
       text-decoration: none;
       font-family: var(--font-mono);
       font-size: 0.9rem;
-      transition: color 0.3s;
+      font-weight: 600;
+      transition: color 0.2s;
     }
 
     .nav-links a:hover {
-      color: var(--cyber-teal);
+      color: var(--accent-cyan);
     }
 
     /* Bug Hunt Toggle Button */
     .bug-toggle {
-      background: var(--bg-panel);
-      border: 1px solid var(--text-muted);
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-light);
       color: var(--text-muted);
-      padding: 6px 14px;
+      padding: 8px 16px;
       font-family: var(--font-mono);
       font-size: 0.85rem;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .bug-toggle:hover {
+      border-color: var(--text-muted);
     }
 
     .bug-toggle.active {
+      background: #ECFDF5;
       border-color: var(--volt-green);
-      color: var(--volt-green);
-      box-shadow: 0 0 12px rgba(57, 255, 20, 0.4);
+      color: #047857;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
     }
 
     /* Alert Banner */
     .alert-banner {
-      background: rgba(57, 255, 20, 0.15);
+      background: #ECFDF5;
       border-bottom: 2px solid var(--volt-green);
-      color: var(--volt-green);
+      color: #065F46;
       font-family: var(--font-mono);
+      font-weight: bold;
       text-align: center;
-      padding: 10px;
+      padding: 12px;
       font-size: 0.95rem;
       display: none;
       animation: slideDown 0.3s ease-out;
@@ -197,7 +199,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 40px;
-      min-height: 80vh;
+      min-height: 75vh;
     }
 
     .hero-content {
@@ -206,33 +208,37 @@
 
     .terminal-tag {
       font-family: var(--font-mono);
-      color: var(--cyber-teal);
-      margin-bottom: 10px;
+      color: var(--accent-cyan);
+      font-weight: bold;
+      margin-bottom: 12px;
       display: inline-block;
+      background: rgba(6, 182, 212, 0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
     }
 
     .hero h1 {
-      font-size: 3.2rem;
+      font-size: 3.4rem;
       line-height: 1.1;
-      margin-bottom: 15px;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(0, 240, 212, 0.3);
+      margin-bottom: 12px;
+      color: var(--text-main);
       position: relative;
-      transition: all 0.2s ease;
     }
 
     .hero-role {
       font-family: var(--font-mono);
       font-size: 1.4rem;
-      color: var(--deep-violet);
-      margin-bottom: 20px;
+      color: var(--accent-cyan);
+      font-weight: bold;
+      margin-bottom: 24px;
       min-height: 1.8rem;
     }
 
     .type-cursor {
       display: inline-block;
       width: 10px;
-      background-color: var(--cyber-teal);
+      background-color: var(--accent-cyan);
       animation: blink 0.8s infinite;
     }
 
@@ -242,49 +248,44 @@
     }
 
     .hero p {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
       max-width: 600px;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      max-width: 500px;
+      gap: 16px;
+      max-width: 520px;
     }
 
     .stat-box {
-      background: var(--bg-navy);
-      border: 1px solid rgba(0, 240, 212, 0.2);
-      padding: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-top: 3px solid var(--accent-cyan);
+      padding: 16px;
       text-align: center;
-      position: relative;
-    }
-
-    .stat-box::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 6px; height: 6px;
-      border-top: 1px solid var(--cyber-teal);
-      border-left: 1px solid var(--cyber-teal);
+      border-radius: 6px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
     }
 
     .stat-number {
       font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--cyber-teal);
-      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--text-main);
+      font-weight: 800;
     }
 
     .stat-label {
       font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--text-muted);
+      font-weight: bold;
     }
 
-    /* HUD Cyber Avatar */
+    /* Electric Oasis Avatar Frame */
     .hero-avatar {
       width: 320px;
       height: 320px;
@@ -298,35 +299,20 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      border: 2px solid var(--deep-violet);
-      clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+      background: var(--bg-surface);
+      border: 2px solid rgba(6, 182, 212, 0.3);
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, rgba(10, 10, 18, 0.8) 70%);
-      box-shadow: inset 0 0 20px rgba(0, 240, 212, 0.1);
+      box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      transform: rotate(3deg);
+      transition: transform 0.3s;
+      padding: 12px;
     }
 
-    .avatar-inner {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      color: var(--cyber-teal);
-      text-shadow: 0 0 15px var(--cyber-teal);
-      border: 1px dashed rgba(0, 240, 212, 0.4);
-      width: 80%;
-      height: 80%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
-    }
-
-    .avatar-sub {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-main);
-      margin-top: 10px;
+    .hero-avatar:hover .avatar-frame {
+      transform: rotate(0deg);
     }
 
     /* ==========================================================================
@@ -337,29 +323,23 @@
     }
 
     .about-panel {
-      background: var(--bg-navy);
-      border: 1px solid rgba(124, 58, 237, 0.4);
-      padding: 30px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 36px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
       position: relative;
-    }
-
-    .about-panel::after {
-      content: "STATUS: ACTIVE // AGENT_ID: HB-8821";
-      position: absolute;
-      top: -10px;
-      right: 20px;
-      background: var(--bg-panel);
-      padding: 2px 10px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--cyber-teal);
-      border: 1px solid var(--cyber-teal);
     }
 
     .about-text {
       font-size: 1.05rem;
       color: var(--text-main);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+    }
+
+    .about-text:last-child {
+      margin-bottom: 0;
     }
 
     /* ==========================================================================
@@ -372,53 +352,60 @@
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
+      gap: 24px;
     }
 
     .project-card {
-      background: var(--bg-navy);
-      border: 1px solid rgba(0, 240, 212, 0.2);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s, border-color 0.3s;
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     }
 
     .project-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--cyber-teal);
-      box-shadow: 0 5px 15px rgba(0, 240, 212, 0.1);
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 12px 20px -5px rgba(6, 182, 212, 0.15);
     }
 
     .project-thumb {
-      height: 180px;
-      background: var(--bg-panel);
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--border-light);
       position: relative;
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--text-muted);
+      overflow: hidden;
+      background: var(--bg-main);
     }
 
-    .thumb-1 { background: linear-gradient(45deg, #16162d, #2a1b4e); }
-    .thumb-2 { background: linear-gradient(45deg, #0f1e2e, #162d2a); }
-    .thumb-3 { background: linear-gradient(45deg, #2d1625, #1f162d); }
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-thumb img {
+      transform: scale(1.05);
+    }
 
     .project-content {
-      padding: 20px;
+      padding: 24px;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
     .project-title {
-      font-size: 1.3rem;
-      color: #fff;
-      margin-bottom: 8px;
+      font-size: 1.25rem;
+      color: var(--text-main);
+      margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -426,17 +413,19 @@
 
     .launch-badge {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      background: rgba(124, 58, 237, 0.3);
+      font-size: 0.7rem;
+      background: var(--bg-subtle);
       color: var(--text-main);
-      padding: 2px 6px;
-      border: 1px solid var(--deep-violet);
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(30, 41, 59, 0.15);
     }
 
     .project-desc {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       flex: 1;
     }
 
@@ -444,37 +433,40 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .tech-tag {
       font-family: var(--font-mono);
       font-size: 0.75rem;
-      background: rgba(0, 240, 212, 0.1);
-      color: var(--cyber-teal);
-      padding: 3px 8px;
-      border-radius: 2px;
+      background: rgba(6, 182, 212, 0.08);
+      color: var(--accent-dark);
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
     }
 
     .project-links {
       display: flex;
-      gap: 15px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 15px;
+      gap: 16px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 16px;
     }
 
     .btn-link {
       font-family: var(--font-mono);
       font-size: 0.85rem;
+      font-weight: bold;
       color: var(--text-main);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
+      transition: color 0.2s;
     }
 
     .btn-link:hover {
-      color: var(--cyber-teal);
+      color: var(--accent-cyan);
     }
 
     /* ==========================================================================
@@ -487,22 +479,24 @@
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
+      gap: 24px;
     }
 
     .skill-category {
-      background: var(--bg-navy);
-      border: 1px solid rgba(124, 58, 237, 0.3);
-      padding: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     }
 
     .skill-category h3 {
-      font-size: 1.1rem;
-      color: var(--cyber-teal);
-      margin-bottom: 15px;
+      font-size: 1rem;
+      color: var(--accent-dark);
+      margin-bottom: 16px;
       font-family: var(--font-mono);
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-      padding-bottom: 8px;
+      border-bottom: 1.5px dashed var(--border-light);
+      padding-bottom: 10px;
     }
 
     .skill-list {
@@ -512,11 +506,14 @@
     }
 
     .skill-item {
-      background: var(--bg-panel);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--bg-main);
+      border: 1px solid var(--border-light);
+      color: var(--text-main);
       padding: 6px 12px;
       font-size: 0.85rem;
       font-family: var(--font-mono);
+      font-weight: 600;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -524,8 +521,8 @@
     }
 
     .skill-item:hover {
-      border-color: var(--cyber-teal);
-      background: rgba(0, 240, 212, 0.05);
+      border-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.05);
     }
 
     /* ==========================================================================
@@ -539,81 +536,97 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
-      background: var(--bg-navy);
-      border: 1px solid rgba(0, 240, 212, 0.3);
-      padding: 30px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 36px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03);
     }
 
     .contact-info h3 {
-      color: #fff;
-      margin-bottom: 15px;
+      color: var(--text-main);
+      margin-bottom: 14px;
     }
 
     .contact-links {
       list-style: none;
-      margin-top: 20px;
+      margin-top: 24px;
     }
 
     .contact-links li {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
       font-family: var(--font-mono);
+      font-size: 0.95rem;
     }
 
     .contact-links a {
-      color: var(--cyber-teal);
+      color: var(--accent-dark);
+      font-weight: bold;
       text-decoration: none;
     }
 
+    .contact-links a:hover {
+      text-decoration: underline;
+    }
+
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
     .form-group label {
       display: block;
       font-family: var(--font-mono);
       font-size: 0.85rem;
+      font-weight: bold;
       color: var(--text-muted);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
     .form-control {
       width: 100%;
-      background: var(--bg-panel);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      color: #fff;
+      background: var(--bg-main);
+      border: 1px solid var(--border-light);
+      padding: 12px;
+      border-radius: 6px;
+      color: var(--text-main);
       font-family: var(--font-mono);
+      font-size: 0.9rem;
       outline: none;
+      transition: border-color 0.2s;
     }
 
     .form-control:focus {
-      border-color: var(--cyber-teal);
+      border-color: var(--accent-cyan);
+      background: #fff;
     }
 
     .submit-btn {
-      background: transparent;
-      border: 1px solid var(--cyber-teal);
-      color: var(--cyber-teal);
-      padding: 10px 20px;
+      background: var(--text-main);
+      border: none;
+      color: #fff;
+      padding: 12px 24px;
       font-family: var(--font-display);
       font-weight: bold;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.25s;
       width: 100%;
+      letter-spacing: 1px;
     }
 
     .submit-btn:hover {
-      background: var(--cyber-teal);
-      color: var(--bg-void);
+      background: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 20px 0;
+      border-top: 1px solid var(--border-light);
+      padding: 24px 0;
       text-align: center;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
@@ -633,7 +646,7 @@
     .bug1-active {
       animation: bugVibrate 0.15s infinite !important;
       color: var(--hot-pink) !important;
-      text-shadow: 2px 2px 0px #00FFFF, -2px -2px 0px #FF00FF !important;
+      text-shadow: 2px 2px 0px rgba(6, 182, 212, 0.5) !important;
       cursor: crosshair !important;
       z-index: 50;
     }
@@ -644,25 +657,27 @@
         45deg,
         var(--hot-pink),
         var(--hot-pink) 15px,
-        #000 15px,
-        #000 30px
+        #1E293B 15px,
+        #1E293B 30px
       ) !important;
       cursor: crosshair !important;
     }
 
-    .bug2-active #project-thumb-2 span {
-      display: none !important;
+    .bug2-active #project-thumb-2 img {
+      opacity: 0 !important;
     }
 
     .asset-badge {
       display: none;
       background: var(--volt-green);
-      color: #000;
+      color: #fff;
       font-family: var(--font-mono);
       font-weight: bold;
-      padding: 4px 8px;
+      padding: 6px 10px;
       font-size: 0.8rem;
-      border-radius: 2px;
+      border-radius: 4px;
+      position: absolute;
+      z-index: 20;
     }
 
     /* Bug 3: T-Pose / Rotated Icon */
@@ -675,7 +690,6 @@
     .bug3-active .skill-icon {
       transform: rotate(90deg);
       display: inline-block;
-      color: var(--hot-pink);
     }
 
     .skill-icon {
@@ -686,7 +700,7 @@
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(10, 10, 18, 0.9);
+      background: rgba(30, 41, 59, 0.75);
       backdrop-filter: blur(8px);
       z-index: 10000;
       display: flex;
@@ -703,42 +717,45 @@
     }
 
     .modal-box {
-      background: var(--bg-navy);
+      background: var(--bg-surface);
       border: 2px solid var(--volt-green);
+      border-radius: 12px;
       padding: 40px;
       max-width: 500px;
       text-align: center;
-      box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
-      position: relative;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
 
     .modal-title {
       font-family: var(--font-display);
-      color: var(--volt-green);
+      color: #059669;
       font-size: 1.8rem;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
 
     .modal-text {
       font-family: var(--font-mono);
-      margin-bottom: 25px;
+      margin-bottom: 26px;
       color: var(--text-main);
+      font-size: 0.95rem;
     }
 
     .modal-btn {
       background: var(--volt-green);
-      color: #000;
+      color: #fff;
       font-family: var(--font-display);
       font-weight: 800;
       padding: 12px 24px;
+      border-radius: 6px;
       border: none;
       cursor: pointer;
       text-transform: uppercase;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.2s;
     }
 
     .modal-btn:hover {
-      transform: scale(1.05);
+      background: #059669;
+      transform: scale(1.03);
     }
 
     /* Responsive */
@@ -754,19 +771,19 @@
 
   <!-- ALERT BANNER -->
   <div id="alert-banner" class="alert-banner">
-    ⚠️ SYSTEM WARNING: 3 QA bugs have been introduced to this page. Find and patch them! [Found: <span id="bug-count">0</span>/3]
+    ⚠️ SYSTEM WARNING: 3 QA defects detected on page. Click visual glitches to patch! [Patched: <span id="bug-count">0</span>/3]
   </div>
 
   <!-- HEADER / NAVBAR -->
   <header>
     <div class="container">
       <nav>
-        <a href="#" class="logo"><span>[QA_SYS]</span> HEMAL BHURUK</a>
+        <a href="#" class="logo"><span>//</span> HEMAL BHURUK</a>
         <ul class="nav-links">
-          <li><a href="#about">// ABOUT</a></li>
-          <li><a href="#projects">// PROJECTS</a></li>
-          <li><a href="#skills">// SKILLS</a></li>
-          <li><a href="#contact">// CONTACT</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
         <button id="bug-toggle-btn" class="bug-toggle" onclick="toggleBugHunt()">
           BUG HUNT: OFF 🔘
@@ -778,7 +795,7 @@
   <!-- HERO SECTION -->
   <section class="hero container">
     <div class="hero-content">
-      <span class="terminal-tag">> SYSTEM_READY: QUALITY ASSURANCE</span>
+      <span class="terminal-tag">> SYSTEM_STATUS: VERIFIED QA PRO</span>
       <h1 id="hero-title" onclick="patchBug1()">HEMAL BHURUK</h1>
       <div class="hero-role" id="typed-text"></div>
       <p>
@@ -801,10 +818,8 @@
     </div>
     <div class="hero-avatar">
       <div class="avatar-frame">
-        <div class="avatar-inner">
-          <span>HB</span>
-          <span class="avatar-sub">DEV // QA</span>
-        </div>
+        <!-- PLACED PORTRAIT IMAGE -->
+        <img src="Self.jpg" alt="Hemal Bhuruk Profile Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
       </div>
     </div>
   </section>
@@ -829,8 +844,9 @@
       
       <!-- Project 1 -->
       <div class="project-card">
-        <div class="project-thumb thumb-1">
-          <span>TIC TAC TOE: EMOJI</span>
+        <div class="project-thumb">
+          <!-- PLACED TIC TAC TOE ICON -->
+          <img src="tictactoe-icon.png" alt="Tic Tac Toe Game">
         </div>
         <div class="project-content">
           <div class="project-title">
@@ -846,17 +862,18 @@
             <span class="tech-tag">Leaderboards</span>
           </div>
           <div class="project-links">
-            <a href="#" class="btn-link">[LIVE DEMO]</a>
-            <a href="#" class="btn-link">[TEST LOGS]</a>
+            <a href="#" class="btn-link">Live Demo -></a>
+            <a href="#" class="btn-link">Test Logs -></a>
           </div>
         </div>
       </div>
 
       <!-- Project 2 (Contains Bug 2 Target) -->
       <div class="project-card" id="project-card-2" onclick="patchBug2()">
-        <div class="project-thumb thumb-2" id="project-thumb-2">
-          <span>SQUISHY DROP: ASMR</span>
-          <div id="asset-badge" class="asset-badge">Asset loaded!</div>
+        <div class="project-thumb" id="project-thumb-2">
+          <!-- PLACED SQUISHY DROP ICON -->
+          <img src="squishydrop-icon.jpg" alt="Squishy Drop Game">
+          <div id="asset-badge" class="asset-badge">Asset Loaded!</div>
         </div>
         <div class="project-content">
           <div class="project-title">
@@ -872,16 +889,17 @@
             <span class="tech-tag">Exploratory</span>
           </div>
           <div class="project-links">
-            <a href="#" class="btn-link">[LIVE DEMO]</a>
-            <a href="#" class="btn-link">[TEST LOGS]</a>
+            <a href="#" class="btn-link">Live Demo -></a>
+            <a href="#" class="btn-link">Test Logs -></a>
           </div>
         </div>
       </div>
 
       <!-- Project 3 -->
       <div class="project-card">
-        <div class="project-thumb thumb-3">
-          <span>TAP SQUARE JIGSAW</span>
+        <div class="project-thumb">
+          <!-- PLACED TAP SQUARE JIGSAW ICON -->
+          <img src="tapsquarejigsaw-icon.jpg" alt="Tap Square Jigsaw Game">
         </div>
         <div class="project-content">
           <div class="project-title">
@@ -897,8 +915,8 @@
             <span class="tech-tag">Pre-Release QA</span>
           </div>
           <div class="project-links">
-            <a href="#" class="btn-link">[LIVE DEMO]</a>
-            <a href="#" class="btn-link">[TEST LOGS]</a>
+            <a href="#" class="btn-link">Live Demo -></a>
+            <a href="#" class="btn-link">Test Logs -></a>
           </div>
         </div>
       </div>
@@ -959,9 +977,9 @@
     <div class="contact-wrapper">
       <div class="contact-info">
         <h3>READY TO DEPLOY HIGH-QUALITY TITLES?</h3>
-        <p style="color: var(--text-muted);">Whether you need launch validation, rigorous regression cycles, or an experienced tester who speaks developer language, let's connect.</p>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Whether you need launch validation, rigorous regression cycles, or an experienced tester who speaks developer language, let's connect.</p>
         <ul class="contact-links">
-          <li>📧 EMAIL: <a href="mailto:hemalbhuruk@example.com">hemal.bhuruk@qa-dev.com</a></li>
+          <li>📧 EMAIL: <a href="mailto:hemal.bhuruk@qa-dev.com">hemal.bhuruk@qa-dev.com</a></li>
           <li>🔗 LINKEDIN: <a href="#">linkedin.com/in/hemal-bhuruk</a></li>
           <li>💻 GITHUB: <a href="#">github.com/hemal-bhuruk</a></li>
           <li>📍 LOCATION: Mumbai, India</li>
@@ -969,25 +987,25 @@
       </div>
       <form onsubmit="event.preventDefault(); alert('Transmission Sent! Hemal will reply shortly.');">
         <div class="form-group">
-          <label>IDENTIFIER [NAME]</label>
+          <label>NAME</label>
           <input type="text" class="form-control" placeholder="Enter your name..." required>
         </div>
         <div class="form-group">
-          <label>COMMS CHANNEL [EMAIL]</label>
+          <label>EMAIL</label>
           <input type="email" class="form-control" placeholder="Enter your email..." required>
         </div>
         <div class="form-group">
-          <label>TRANSMISSION DATA [MESSAGE]</label>
-          <textarea class="form-control" rows="4" placeholder="Discussing QA opportunity..." required></textarea>
+          <label>MESSAGE</label>
+          <textarea class="form-control" rows="4" placeholder="Discussing a QA opportunity..." required></textarea>
         </div>
-        <button type="submit" class="submit-btn">SEND TRANSMISSION >></button>
+        <button type="submit" class="submit-btn">SEND MESSAGE -></button>
       </form>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      SYSTEM TERMINAL // DESIGNED & DEVELOPED FOR HEMAL BHURUK &copy; 2026 // ALL SYSTEMS NOMINAL
+      DESIGNED & DEVELOPED FOR HEMAL BHURUK &copy; 2026 // ELECTRIC OASIS EDITION
     </div>
   </footer>
 
@@ -998,7 +1016,7 @@
       <div class="modal-text">
         You found all 3 QA defects. Your attention to detail is elite. Let's work together!
       </div>
-      <button class="modal-btn" onclick="closeModalAndScroll()">PROCEED TO CONTACT >></button>
+      <button class="modal-btn" onclick="closeModalAndScroll()">PROCEED TO CONTACT -></button>
     </div>
   </div>
 
@@ -1104,7 +1122,6 @@
       if (!bugHuntActive || bugsPatched.bug2) return;
       document.getElementById("project-card-2").classList.remove("bug2-active");
       document.getElementById("asset-badge").style.display = "inline-block";
-      document.getElementById("project-thumb-2").style.background = "#0f1e2e";
       bugsPatched.bug2 = true;
       updateBugCount();
     }
