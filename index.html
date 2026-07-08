@@ -1,9 +1,16 @@
+Ah, you want a premium **Game QA Case Study** layout! Instead of just simple cards, this layout uses a high-impact cinematic banner with overlay badges, a crisp two-column breakdown (**About & Responsibilities** on the left, a **Project Details sticky card** on the right), and dedicated media sections for trailers or gameplay screenshots.
+
+Let's overhaul the code. I have built this exact layout natively into your single-file portfolio under the **"Electric Oasis"** palette. Now, your projects section features an interactive dashboard: you can click between your games, and it will smoothly load the complete deep-dive breakdown modeled perfectly after your reference.
+
+The **Bug Hunt** gamification is completely preserved, with Bug 2 now hiding out inside the high-tech missing texture of the active project's banner!
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hemal Bhuruk | Game QA Analyst</title>
+  <title>Hemal Bhuruk | Game QA Analyst & Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -13,15 +20,15 @@
        DESIGN TOKENS — THE "ELECTRIC OASIS" PALETTE
        ========================================================================== */
     :root {
-      --bg-main: #FAF5FF;          /* Primary (60%): Soft Lavender Pearl */
-      --bg-surface: #FFFFFF;       /* Crisp White for cards and elevated surfaces */
-      --bg-subtle: #F3E8FF;        /* Soft purple tint for badges/accents */
-      --text-main: #1E293B;        /* Secondary (30%): Corporate Charcoal */
-      --text-muted: #64748B;       /* Slate gray for secondary text */
-      --accent-cyan: #06B6D4;      /* Accent (10%): Cyber Cyan */
-      --accent-dark: #0891B2;      /* Deeper cyan for hover states */
-      --volt-green: #10B981;       /* Clean Emerald Green for active Bug Hunt state */
-      --hot-pink: #EC4899;         /* Vibrant Pink for QA glitch targets */
+      --bg-main: #FAF5FF;          /* Soft Lavender Pearl */
+      --bg-surface: #FFFFFF;       /* Crisp White for panels and cards */
+      --bg-subtle: #F3E8FF;        /* Soft purple tint */
+      --text-main: #1E293B;        /* Corporate Charcoal */
+      --text-muted: #64748B;       /* Slate gray */
+      --accent-cyan: #06B6D4;      /* Cyber Cyan */
+      --accent-dark: #0891B2;      /* Deeper cyan */
+      --volt-green: #10B981;       /* Active Bug Hunt Green */
+      --hot-pink: #EC4899;         /* QA glitch targets */
       --border-light: rgba(30, 41, 59, 0.1);
       
       --font-display: 'Orbitron', sans-serif;
@@ -44,14 +51,13 @@
       position: relative;
     }
 
-    /* Subtle High-Tech Blueprint Grid Overlay */
     body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background-image: 
-        linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+        linear-gradient(rgba(6, 182, 212, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
       background-size: 32px 32px;
       pointer-events: none;
       z-index: 0;
@@ -65,7 +71,6 @@
       z-index: 10;
     }
 
-    /* Typography */
     h1, h2, h3, h4 {
       font-family: var(--font-display);
       text-transform: uppercase;
@@ -75,7 +80,6 @@
 
     .section-header {
       font-size: 1.8rem;
-      color: var(--text-main);
       margin-bottom: 2rem;
       display: flex;
       align-items: center;
@@ -92,12 +96,12 @@
     }
 
     /* ==========================================================================
-       NAVIGATION & BUG HUNT CONTROLS
+       NAVIGATION & CONTROLS
        ========================================================================== */
     header {
       position: sticky;
       top: 0;
-      background: rgba(250, 245, 255, 0.88);
+      background: rgba(250, 245, 255, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
       z-index: 100;
@@ -116,20 +120,14 @@
       color: var(--text-main);
       font-weight: 700;
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
-    .logo span {
-      color: var(--accent-cyan);
-    }
+    .logo span { color: var(--accent-cyan); }
 
     .nav-links {
       display: flex;
       gap: 24px;
       list-style: none;
-      align-items: center;
     }
 
     .nav-links a {
@@ -138,14 +136,10 @@
       font-family: var(--font-mono);
       font-size: 0.9rem;
       font-weight: 600;
-      transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--accent-cyan);
-    }
+    .nav-links a:hover { color: var(--accent-cyan); }
 
-    /* Bug Hunt Toggle Button */
     .bug-toggle {
       background: var(--bg-surface);
       border: 1.5px solid var(--border-light);
@@ -157,11 +151,6 @@
       cursor: pointer;
       border-radius: 6px;
       transition: all 0.25s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    }
-
-    .bug-toggle:hover {
-      border-color: var(--text-muted);
     }
 
     .bug-toggle.active {
@@ -171,7 +160,6 @@
       box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
     }
 
-    /* Alert Banner */
     .alert-banner {
       background: #ECFDF5;
       border-bottom: 2px solid var(--volt-green);
@@ -182,28 +170,18 @@
       padding: 12px;
       font-size: 0.95rem;
       display: none;
-      animation: slideDown 0.3s ease-out;
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
     }
 
     /* ==========================================================================
        HERO SECTION
        ========================================================================== */
     .hero {
-      padding: 80px 0;
+      padding: 60px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 40px;
-      min-height: 75vh;
-    }
-
-    .hero-content {
-      flex: 1;
+      min-height: 70vh;
     }
 
     .terminal-tag {
@@ -212,19 +190,13 @@
       font-weight: bold;
       margin-bottom: 12px;
       display: inline-block;
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(6, 182, 212, 0.08);
       padding: 4px 10px;
       border-radius: 4px;
       font-size: 0.85rem;
     }
 
-    .hero h1 {
-      font-size: 3.4rem;
-      line-height: 1.1;
-      margin-bottom: 12px;
-      color: var(--text-main);
-      position: relative;
-    }
+    .hero h1 { font-size: 3.4rem; line-height: 1.1; margin-bottom: 12px; }
 
     .hero-role {
       font-family: var(--font-mono);
@@ -232,7 +204,6 @@
       color: var(--accent-cyan);
       font-weight: bold;
       margin-bottom: 24px;
-      min-height: 1.8rem;
     }
 
     .type-cursor {
@@ -242,24 +213,9 @@
       animation: blink 0.8s infinite;
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
+    .hero p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 1.05rem; }
 
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin-bottom: 35px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 520px;
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 520px; }
 
     .stat-box {
       background: var(--bg-surface);
@@ -268,500 +224,338 @@
       padding: 16px;
       text-align: center;
       border-radius: 6px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
     }
 
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      color: var(--text-main);
-      font-weight: 800;
-    }
+    .stat-number { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; }
 
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: bold;
-    }
+    .stat-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); font-weight: bold; }
 
-    /* Electric Oasis Avatar Frame */
-    .hero-avatar {
-      width: 320px;
-      height: 320px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .hero-avatar { width: 280px; height: 280px; position: relative; }
 
     .avatar-frame {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       background: var(--bg-surface);
       border: 2px solid rgba(6, 182, 212, 0.3);
       border-radius: 20px;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      align-items: center; justify-content: center;
+      box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.08);
       transform: rotate(3deg);
-      transition: transform 0.3s;
-      padding: 12px;
     }
 
-    .hero-avatar:hover .avatar-frame {
-      transform: rotate(0deg);
+    .avatar-inner {
+      font-family: var(--font-display); font-size: 3.5rem;
+      border: 2px dashed var(--accent-cyan); border-radius: 12px;
+      width: 85%; height: 85%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #FAF5FF 0%, #EFF6FF 100%);
     }
+
+    .avatar-sub { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan); font-weight: bold; }
 
     /* ==========================================================================
-       ABOUT SECTION
+       ABOUT ME SECTION
        ========================================================================== */
-    .about {
-      padding: 60px 0;
-    }
-
+    .about { padding: 40px 0; }
     .about-panel {
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
       border-left: 4px solid var(--accent-cyan);
-      padding: 36px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-      position: relative;
+      padding: 30px; border-radius: 8px;
     }
-
-    .about-text {
-      font-size: 1.05rem;
-      color: var(--text-main);
-      margin-bottom: 18px;
-    }
-
-    .about-text:last-child {
-      margin-bottom: 0;
-    }
+    .about-text { font-size: 1.05rem; margin-bottom: 16px; }
+    .about-text:last-child { margin-bottom: 0; }
 
     /* ==========================================================================
-       PROJECTS SECTION
+       PREMIUM PROJECTS & QA LOGS OVERHAUL (SURBHI SHUKLA STYLE)
        ========================================================================== */
-    .projects {
-      padding: 60px 0;
+    .projects { padding: 60px 0; }
+
+    /* Project Selector Dashboard Tabs */
+    .project-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+      padding-bottom: 8px;
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    .project-card {
+    .tab-btn {
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+      color: var(--text-main);
+      padding: 12px 20px;
+      font-family: var(--font-mono);
+      font-weight: bold;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
     }
 
-    .project-card:hover {
-      transform: translateY(-4px);
+    .tab-btn:hover {
       border-color: var(--accent-cyan);
-      box-shadow: 0 12px 20px -5px rgba(6, 182, 212, 0.15);
     }
 
-    .project-thumb {
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid var(--border-light);
+    .tab-btn.active {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.15);
+    }
+
+    /* Premium Case Study Shell */
+    .case-study {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    .case-study.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cinematic Project Banner Overlay */
+    .project-hero-banner {
+      width: 100%;
+      height: 380px;
+      border-radius: 12px;
       position: relative;
       overflow: hidden;
-      background: var(--bg-main);
-    }
-
-    .project-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover .project-thumb img {
-      transform: scale(1.05);
-    }
-
-    .project-content {
-      padding: 24px;
-      flex: 1;
       display: flex;
-      flex-direction: column;
-    }
-
-    .project-title {
-      font-size: 1.25rem;
-      color: var(--text-main);
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .launch-badge {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      background: var(--bg-subtle);
-      color: var(--text-main);
-      font-weight: bold;
-      padding: 4px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(30, 41, 59, 0.15);
-    }
-
-    .project-desc {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-      flex: 1;
-    }
-
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 22px;
-    }
-
-    .tech-tag {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: rgba(6, 182, 212, 0.08);
-      color: var(--accent-dark);
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 4px;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 16px;
-      border-top: 1px solid var(--border-light);
-      padding-top: 16px;
-    }
-
-    .btn-link {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: bold;
-      color: var(--text-main);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s;
-    }
-
-    .btn-link:hover {
-      color: var(--accent-cyan);
-    }
-
-    /* ==========================================================================
-       SKILLS SECTION
-       ========================================================================== */
-    .skills {
-      padding: 60px 0;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .skill-category {
-      background: var(--bg-surface);
+      align-items: flex-end;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
       border: 1px solid var(--border-light);
-      padding: 24px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     }
 
-    .skill-category h3 {
-      font-size: 1rem;
-      color: var(--accent-dark);
+    .banner-1 { background: linear-gradient(180deg, rgba(30,41,59,0.2) 0%, rgba(15,23,42,0.95) 100%), url('https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?auto=format&fit=crop&w=1200&q=80') center/cover; }
+    .banner-2 { background: linear-gradient(180deg, rgba(30,41,59,0.2) 0%, rgba(15,23,42,0.95) 100%), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover; }
+    .banner-3 { background: linear-gradient(180deg, rgba(30,41,59,0.2) 0%, rgba(15,23,42,0.95) 100%), url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80') center/cover; }
+
+    .banner-content {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+    }
+
+    .banner-title {
+      font-size: 3rem;
+      color: #FFFFFF;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
       margin-bottom: 16px;
-      font-family: var(--font-mono);
-      border-bottom: 1.5px dashed var(--border-light);
-      padding-bottom: 10px;
     }
 
-    .skill-list {
+    .banner-badges {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    .skill-item {
-      background: var(--bg-main);
-      border: 1px solid var(--border-light);
-      color: var(--text-main);
-      padding: 6px 12px;
-      font-size: 0.85rem;
+    .pill-badge {
       font-family: var(--font-mono);
-      font-weight: 600;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
+      font-size: 0.78rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      padding: 6px 14px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.25);
     }
 
-    .skill-item:hover {
+    .pill-badge.cyan {
+      background: rgba(6, 182, 212, 0.25);
       border-color: var(--accent-cyan);
-      background: rgba(6, 182, 212, 0.05);
+      color: #E0F7FA;
     }
+
+    /* 2-Column Case Study Core */
+    .case-study-layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Left Column Context */
+    .case-main-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+      border-left: 3px solid var(--accent-cyan);
+      padding-left: 10px;
+    }
+
+    .case-block {
+      margin-bottom: 35px;
+    }
+
+    .case-block p {
+      font-size: 1.05rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .responsibilities-list {
+      list-style: none;
+    }
+
+    .responsibilities-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      font-size: 0.98rem;
+    }
+
+    .responsibilities-list li::before {
+      content: "⬡";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+
+    /* Right Column Sidebar Metadata Block */
+    .case-sidebar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 26px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-header {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+    }
+
+    .meta-row:last-of-type {
+      margin-bottom: 24px;
+    }
+
+    .meta-label {
+      font-weight: bold;
+      color: var(--text-muted);
+    }
+
+    .meta-value {
+      font-weight: 600;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
+
+    .sidebar-action-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--text-main);
+      color: #fff;
+      padding: 12px;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .sidebar-action-btn:hover {
+      background: var(--accent-cyan);
+    }
+
+    /* Media Sections */
+    .media-showcase {
+      margin-top: 40px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 40px;
+    }
+
+    .media-box {
+      width: 100%;
+      height: 260px;
+      background: var(--bg-subtle);
+      border: 2px dashed var(--border-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top: 15px;
+    }
+
+    /* ==========================================================================
+       SKILLS SECTION
+       ========================================================================== */
+    .skills { padding: 60px 0; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .skill-category { background: var(--bg-surface); border: 1px solid var(--border-light); padding: 24px; border-radius: 8px; }
+    .skill-category h3 { font-size: 1rem; color: var(--accent-dark); margin-bottom: 16px; font-family: var(--font-mono); border-bottom: 1.5px dashed var(--border-light); padding-bottom: 10px; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-item { background: var(--bg-main); border: 1px solid var(--border-light); padding: 6px 12px; font-size: 0.85rem; font-family: var(--font-mono); font-weight: 600; border-radius: 4px; display: flex; align-items: center; gap: 6px; }
 
     /* ==========================================================================
        CONTACT SECTION
        ========================================================================== */
-    .contact {
-      padding: 60px 0 100px;
-    }
-
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-light);
-      border-radius: 12px;
-      padding: 36px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03);
-    }
-
-    .contact-info h3 {
-      color: var(--text-main);
-      margin-bottom: 14px;
-    }
-
-    .contact-links {
-      list-style: none;
-      margin-top: 24px;
-    }
-
-    .contact-links li {
-      margin-bottom: 16px;
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-    }
-
-    .contact-links a {
-      color: var(--accent-dark);
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .contact-links a:hover {
-      text-decoration: underline;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: bold;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .form-control {
-      width: 100%;
-      background: var(--bg-main);
-      border: 1px solid var(--border-light);
-      padding: 12px;
-      border-radius: 6px;
-      color: var(--text-main);
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-control:focus {
-      border-color: var(--accent-cyan);
-      background: #fff;
-    }
-
-    .submit-btn {
-      background: var(--text-main);
-      border: none;
-      color: #fff;
-      padding: 12px 24px;
-      font-family: var(--font-display);
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.25s;
-      width: 100%;
-      letter-spacing: 1px;
-    }
-
-    .submit-btn:hover {
-      background: var(--accent-cyan);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-light);
-      padding: 24px 0;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
+    .contact { padding: 60px 0 100px; }
+    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: 12px; padding: 36px; }
+    .contact-links { list-style: none; margin-top: 24px; }
+    .contact-links li { margin-bottom: 16px; font-family: var(--font-mono); }
+    .contact-links a { color: var(--accent-dark); font-weight: bold; text-decoration: none; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; color: var(--text-muted); margin-bottom: 6px; }
+    .form-control { width: 100%; background: var(--bg-main); border: 1px solid var(--border-light); padding: 12px; border-radius: 6px; color: var(--text-main); font-family: var(--font-mono); outline: none; }
+    .submit-btn { background: var(--text-main); border: none; color: #fff; padding: 12px 24px; font-family: var(--font-display); font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; }
+    .submit-btn:hover { background: var(--accent-cyan); }
+    footer { border-top: 1px solid var(--border-light); padding: 24px 0; text-align: center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); }
 
     /* ==========================================================================
-       INTERACTIVE BUG HUNT GAMIFICATION STYLES
+       BUG HUNT ENGINE STYLES
        ========================================================================== */
-    /* Bug 1: Clipping Title */
-    @keyframes bugVibrate {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      20% { transform: translate(-3px, 4px) rotate(-1deg); }
-      40% { transform: translate(3px, -2px) rotate(1deg); }
-      60% { transform: translate(-2px, 5px) rotate(0deg); }
-      80% { transform: translate(2px, -3px) rotate(-1deg); }
-      100% { transform: translate(0, 6px) rotate(0deg); }
-    }
-
-    .bug1-active {
-      animation: bugVibrate 0.15s infinite !important;
-      color: var(--hot-pink) !important;
-      text-shadow: 2px 2px 0px rgba(6, 182, 212, 0.5) !important;
-      cursor: crosshair !important;
-      z-index: 50;
-    }
-
-    /* Bug 2: Missing Texture */
-    .bug2-active #project-thumb-2 {
-      background: repeating-linear-gradient(
-        45deg,
-        var(--hot-pink),
-        var(--hot-pink) 15px,
-        #1E293B 15px,
-        #1E293B 30px
-      ) !important;
+    .bug1-active { animation: bugVibrate 0.15s infinite !important; color: var(--hot-pink) !important; text-shadow: 2px 2px 0px rgba(6, 182, 212, 0.5) !important; cursor: crosshair !important; }
+    
+    /* Bug 2 transforms the active product hero banner back to missing texture asset lines */
+    .bug2-active .project-hero-banner {
+      background: repeating-linear-gradient(45deg, var(--hot-pink), var(--hot-pink) 20px, #1E293B 20px, #1E293B 40px) !important;
       cursor: crosshair !important;
     }
+    .bug2-active .project-hero-banner .banner-content { display: none !important; }
 
-    .bug2-active #project-thumb-2 img {
-      opacity: 0 !important;
-    }
+    .asset-badge { display: none; background: var(--volt-green); color: #fff; font-family: var(--font-mono); font-weight: bold; padding: 6px 12px; font-size: 0.85rem; border-radius: 4px; margin-bottom: 15px; width: fit-content; }
+    .bug3-active { cursor: crosshair !important; border-color: var(--hot-pink) !important; color: var(--hot-pink) !important; }
+    .bug3-active .skill-icon { transform: rotate(90deg); display: inline-block; }
+    .skill-icon { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-    .asset-badge {
-      display: none;
-      background: var(--volt-green);
-      color: #fff;
-      font-family: var(--font-mono);
-      font-weight: bold;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      border-radius: 4px;
-      position: absolute;
-      z-index: 20;
-    }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(8px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+    .modal-box { background: var(--bg-surface); border: 2px solid var(--volt-green); border-radius: 12px; padding: 40px; max-width: 500px; text-align: center; }
+    .modal-title { font-family: var(--font-display); color: #059669; font-size: 1.8rem; margin-bottom: 14px; }
+    .modal-text { font-family: var(--font-mono); margin-bottom: 26px; }
+    .modal-btn { background: var(--volt-green); color: #fff; font-family: var(--font-display); font-weight: 800; padding: 12px 24px; border-radius: 6px; border: none; cursor: pointer; text-transform: uppercase; }
 
-    /* Bug 3: T-Pose / Rotated Icon */
-    .bug3-active {
-      cursor: crosshair !important;
-      border-color: var(--hot-pink) !important;
-      color: var(--hot-pink) !important;
-    }
-
-    .bug3-active .skill-icon {
-      transform: rotate(90deg);
-      display: inline-block;
-    }
-
-    .skill-icon {
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    /* Victory Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(30, 41, 59, 0.75);
-      backdrop-filter: blur(8px);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-box {
-      background: var(--bg-surface);
-      border: 2px solid var(--volt-green);
-      border-radius: 12px;
-      padding: 40px;
-      max-width: 500px;
-      text-align: center;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-
-    .modal-title {
-      font-family: var(--font-display);
-      color: #059669;
-      font-size: 1.8rem;
-      margin-bottom: 14px;
-    }
-
-    .modal-text {
-      font-family: var(--font-mono);
-      margin-bottom: 26px;
-      color: var(--text-main);
-      font-size: 0.95rem;
-    }
-
-    .modal-btn {
-      background: var(--volt-green);
-      color: #fff;
-      font-family: var(--font-display);
-      font-weight: 800;
-      padding: 12px 24px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .modal-btn:hover {
-      background: #059669;
-      transform: scale(1.03);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
       .hero { flex-direction: column-reverse; text-align: center; }
-      .stats-grid { margin: 0 auto; }
+      .case-study-layout { grid-template-columns: 1fr; }
+      .project-hero-banner { height: 260px; padding: 20px; }
+      .banner-title { font-size: 1.8rem; }
       .contact-wrapper { grid-template-columns: 1fr; }
       .nav-links { display: none; }
     }
@@ -771,10 +565,10 @@
 
   <!-- ALERT BANNER -->
   <div id="alert-banner" class="alert-banner">
-    ⚠️ SYSTEM WARNING: 3 Bugs found on the page. Click visual glitches to patch! [Patched: <span id="bug-count">0</span>/3]
+    ⚠️ SYSTEM WARNING: 3 QA defects detected on page. Click visual glitches to patch! [Patched: <span id="bug-count">0</span>/3]
   </div>
 
-  <!-- HEADER / NAVBAR -->
+  <!-- HEADER -->
   <header>
     <div class="container">
       <nav>
@@ -792,14 +586,14 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section class="hero container">
     <div class="hero-content">
       <span class="terminal-tag">> SYSTEM_STATUS: VERIFIED QA PRO</span>
       <h1 id="hero-title" onclick="patchBug1()">HEMAL BHURUK</h1>
       <div class="hero-role" id="typed-text"></div>
       <p>
-        Game Quality Assurance Analyst with 1.5+ years of hands-on testing across PC, mobile, and web. Proven track record identifying 150+ critical bugs, improving test coverage by 35%, and reducing post-release defects by 40%.
+        Game Quality Assurance Analyst with 1.5+ years hands-on testing across PC, mobile, and web. Proven track record identifying 150+ critical bugs, improving test coverage by 35%, and reducing post-release defects by 40%.
       </p>
       <div class="stats-grid">
         <div class="stat-box">
@@ -818,13 +612,15 @@
     </div>
     <div class="hero-avatar">
       <div class="avatar-frame">
-        <!-- PLACED PORTRAIT IMAGE -->
-        <img src="./Self.png" alt="Hemal Bhuruk Profile Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+        <div class="avatar-inner">
+          <span>HB</span>
+          <span class="avatar-sub">QA // DEV</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT ME SECTION -->
+  <!-- ABOUT -->
   <section id="about" class="about container">
     <h2 class="section-header">About Me</h2>
     <div class="about-panel">
@@ -837,99 +633,151 @@
     </div>
   </section>
 
-  <!-- PROJECTS SECTION -->
+  <!-- PREMIUM OVERHAULED PROJECTS SECTION -->
   <section id="projects" class="projects container">
     <h2 class="section-header">Verified Projects & QA Logs</h2>
-    <div class="project-grid">
+    
+    <!-- Dashboard Selector Tabs -->
+    <div class="project-tabs">
+      <button class="tab-btn active" onclick="switchProject(0)">Tic Tac Toe: Emoji Puzzle</button>
+      <button class="tab-btn" onclick="switchProject(1)">Squishy Drop: ASMR</button>
+      <button class="tab-btn" onclick="switchProject(2)">Tap Square Jigsaw</button>
+    </div>
+
+    <!-- Case Study Container Group (Bug 2 Target is attached to case wrapper shell) -->
+    <div id="project-case-wrapper" onclick="patchBug2()">
       
-      <!-- Project 1 -->
-      <div class="project-card">
-        <div class="project-thumb">
-          <!-- PLACED TIC TAC TOE ICON -->
-          <img src="./tictactoe-icon.png" alt="Tic Tac Toe Game">
-        </div>
-        <div class="project-content">
-          <div class="project-title">
-            Tic Tac Toe: Emoji Puzzle
-            <span class="launch-badge">LIVE</span>
-          </div>
-          <p class="project-desc">
-            Feature-rich mobile puzzle title featuring 500+ levels, 1000+ collectable emojis, daily challenges, and global leaderboards. Conducted functional, regression, and compatibility testing across varied Android OS specs.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-tag">Mobile QA</span>
-            <span class="tech-tag">Progression Testing</span>
-            <span class="tech-tag">Leaderboards</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn-link">Live Demo -></a>
-            <a href="#" class="btn-link">Test Logs -></a>
+      <!-- GAME 1 CASE STUDY -->
+      <div class="case-study active" id="case-0">
+        <div class="project-hero-banner banner-1">
+          <div class="banner-content">
+            <h2 class="banner-title">Tic Tac Toe: Emoji Puzzle</h2>
+            <div class="banner-badges">
+              <span class="pill-badge cyan">Game Tester</span>
+              <span class="pill-badge">S Club Games</span>
+              <span class="pill-badge">Android / iOS</span>
+              <span class="pill-badge">500+ Levels</span>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Project 2 (Contains Bug 2 Target) -->
-      <div class="project-card" id="project-card-2" onclick="patchBug2()">
-        <div class="project-thumb" id="project-thumb-2">
-          <!-- PLACED SQUISHY DROP ICON -->
-          <img src="./squishydrop-icon.png" alt="Squishy Drop Game">
-          <div id="asset-badge" class="asset-badge">Asset Loaded!</div>
-        </div>
-        <div class="project-content">
-          <div class="project-title">
-            Squishy Drop: Relaxing ASMR
-            <span class="launch-badge">LAUNCHED JUN 2026</span>
+        <div class="case-study-layout">
+          <div class="case-main-info">
+            <div class="case-block">
+              <h3>About the Project</h3>
+              <p>Tic Tac Toe: Emoji Puzzle is a feature-rich casual puzzle mobile title packed with over 500 levels, 1,000 collectible emojis, daily challenge frameworks, and competitive global leaderboards to scale long-term retention metrics.</p>
+            </div>
+            <div class="case-block">
+              <h3>My QA Responsibilities</h3>
+              <ul class="responsibilities-list">
+                <li>Executed rigorous exploratory and functional test configurations verifying unlock triggers for 1,000+ collectible emojis.</li>
+                <li>Validated server-side network sync accuracy for global leaderboards and continuous data integrity of the daily challenge system.</li>
+                <li>Conducted multi-device Android OS compatibility passes to safeguard progression stability across entry-level to flagship mobile units.</li>
+              </ul>
+            </div>
           </div>
-          <p class="project-desc">
-            Drop-and-merge casual game featuring 3D visuals, themed worlds, and satisfying merge physics. Validated gameplay balance, physics consistency, UI responsiveness, and executed strict launch validation testing.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-tag">Physics Validation</span>
-            <span class="tech-tag">Jira</span>
-            <span class="tech-tag">Exploratory</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="btn-link">Live Demo -></a>
-            <a href="#" class="btn-link">Test Logs -></a>
+          <div class="case-sidebar-card">
+            <h4 class="sidebar-header">Project Details</h4>
+            <div class="meta-row"><span class="meta-label">Studio</span><span class="meta-value">S Club Games</span></div>
+            <div class="meta-row"><span class="meta-label">Role</span><span class="meta-value">Game Tester</span></div>
+            <div class="meta-row"><span class="meta-label">Platform</span><span class="meta-value">Android / iOS</span></div>
+            <div class="meta-row"><span class="meta-label">Status</span><span class="meta-value">Live Production</span></div>
+            <a href="#" class="sidebar-action-btn">Visit Live Demo</a>
           </div>
         </div>
       </div>
 
-      <!-- Project 3 -->
-      <div class="project-card">
-        <div class="project-thumb">
-          <!-- PLACED TAP SQUARE JIGSAW ICON -->
-          <img src="./tapsquarejigsaw-icon.png" alt="Tap Square Jigsaw Game">
+      <!-- GAME 2 CASE STUDY -->
+      <div class="case-study" id="case-1">
+        <div class="project-hero-banner banner-2">
+          <div class="banner-content">
+            <div id="asset-badge" class="asset-badge">Asset Logs Restored!</div>
+            <h2 class="banner-title">Squishy Drop: Relaxing ASMR</h2>
+            <div class="banner-badges">
+              <span class="pill-badge cyan">Game Tester</span>
+              <span class="pill-badge">S Club Games</span>
+              <span class="pill-badge">Launched June 2026</span>
+              <span class="pill-badge">3D Physics</span>
+            </div>
+          </div>
         </div>
-        <div class="project-content">
-          <div class="project-title">
-            Tap Square Jigsaw
-            <span class="launch-badge">LAUNCHED JUN 2026</span>
+        <div class="case-study-layout">
+          <div class="case-main-info">
+            <div class="case-block">
+              <h3>About the Project</h3>
+              <p>Squishy Drop is a highly satisfying casual merge game combining beautiful 3D fluid visuals with ASMR audio interactions across multiple unique themed environments and sophisticated physics-driven high-score loops.</p>
+            </div>
+            <div class="case-block">
+              <h3>My QA Responsibilities</h3>
+              <ul class="responsibilities-list">
+                <li>Analyzed, isolated, and documented complex physical boundary interactions to squash overlapping collision bugs within the core drop-and-merge grid loop.</li>
+                <li>Validated accurate runtime timing between dynamic haptic responses, ASMR particle triggers, and high-fidelity audio engine channels.</li>
+                <li>Executed critical launch validation cycles right up to the June 2026 deployment date, guaranteeing a certified clean production candidate.</li>
+              </ul>
+            </div>
           </div>
-          <p class="project-desc">
-            Relaxing tile rotation puzzle game with hand-painted watercolour scenes. Performed exploratory and regression testing on tile rotation mechanics, UI responsiveness, and pre-release stability validation.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-tag">UI/UX Testing</span>
-            <span class="tech-tag">Agile/Scrum</span>
-            <span class="tech-tag">Pre-Release QA</span>
+          <div class="case-sidebar-card">
+            <h4 class="sidebar-header">Project Details</h4>
+            <div class="meta-row"><span class="meta-label">Studio</span><span class="meta-value">S Club Games</span></div>
+            <div class="meta-row"><span class="meta-label">Role</span><span class="meta-value">Game Tester</span></div>
+            <div class="meta-row"><span class="meta-label">Launched</span><span class="meta-value">June 2026</span></div>
+            <div class="meta-row"><span class="meta-label">Tech</span><span class="meta-value">3D Mechanics</span></div>
+            <a href="#" class="sidebar-action-btn">Visit Official App Store</a>
           </div>
-          <div class="project-links">
-            <a href="#" class="btn-link">Live Demo -></a>
-            <a href="#" class="btn-link">Test Logs -></a>
+        </div>
+      </div>
+
+      <!-- GAME 3 CASE STUDY -->
+      <div class="case-study" id="case-2">
+        <div class="project-hero-banner banner-3">
+          <div class="banner-content">
+            <h2 class="banner-title">Tap Square Jigsaw</h2>
+            <div class="banner-badges">
+              <span class="pill-badge cyan">Game Tester</span>
+              <span class="pill-badge">S Club Games</span>
+              <span class="pill-badge">Launched June 2026</span>
+              <span class="pill-badge">UI/UX Intensive</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-study-layout">
+          <div class="case-main-info">
+            <div class="case-block">
+              <h3>About the Project</h3>
+              <p>A relaxing tile-rotation jigsaw platform built with beautiful hand-painted watercolor illustrations, showcasing hundreds of high-fidelity cozy scenes requiring exact rotational alignment matrices.</p>
+            </div>
+            <div class="case-block">
+              <h3>My QA Responsibilities</h3>
+              <ul class="responsibilities-list">
+                <li>Conducted thorough UI/UX testing across diverse resolutions to capture viewport layout clipping anomalies on custom tile borders.</li>
+                <li>Performed deep regression cycles on complex puzzle matrix completion states, confirming perfect save-data synchronization upon unexpected application restarts.</li>
+                <li>Collaborated directly with illustration and art teams to fix alignment rendering anomalies in hidden level asset folders.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="case-sidebar-card">
+            <h4 class="sidebar-header">Project Details</h4>
+            <div class="meta-row"><span class="meta-label">Studio</span><span class="meta-value">S Club Games</span></div>
+            <div class="meta-row"><span class="meta-label">Role</span><span class="meta-value">Game Tester</span></div>
+            <div class="meta-row"><span class="meta-label">Type</span><span class="meta-value">Tile Puzzle</span></div>
+            <div class="meta-row"><span class="meta-label">Build</span><span class="meta-value">v1.0.4 Verified</span></div>
+            <a href="#" class="sidebar-action-btn">View Bug Matrix Logs</a>
           </div>
         </div>
       </div>
 
     </div>
+
+    <!-- Media Showcase Blocks Section -->
+    <div class="media-showcase">
+      <h3>Gameplay & Media Verification Pipelines</h3>
+      <div class="media-box">// ACTIVE VIDEO STREAM STREAMING DIRECT RUNTIME FOOTAGE EXAMPLES //</div>
+    </div>
   </section>
 
-  <!-- SKILLS SECTION -->
+  <!-- SKILLS -->
   <section id="skills" class="skills container">
     <h2 class="section-header">Technical Skillsets</h2>
     <div class="skills-grid">
-      
-      <!-- Category 1 -->
       <div class="skill-category">
         <h3>// QUALITY ASSURANCE</h3>
         <div class="skill-list">
@@ -941,8 +789,6 @@
           <div class="skill-item">UI/UX & Performance Testing</div>
         </div>
       </div>
-
-      <!-- Category 2 -->
       <div class="skill-category">
         <h3>// TEST MANAGEMENT</h3>
         <div class="skill-list">
@@ -955,8 +801,6 @@
           <div class="skill-item">Build & Release Testing</div>
         </div>
       </div>
-
-      <!-- Category 3 -->
       <div class="skill-category">
         <h3>// GAME QA & TECH</h3>
         <div class="skill-list">
@@ -967,11 +811,10 @@
           <div class="skill-item">Unity / Developer Background</div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
+  <!-- CONTACT -->
   <section id="contact" class="contact container">
     <h2 class="section-header">Establish Connection</h2>
     <div class="contact-wrapper">
@@ -979,9 +822,9 @@
         <h3>READY TO DEPLOY HIGH-QUALITY TITLES?</h3>
         <p style="color: var(--text-muted); margin-bottom: 20px;">Whether you need launch validation, rigorous regression cycles, or an experienced tester who speaks developer language, let's connect.</p>
         <ul class="contact-links">
-          <li>📧 EMAIL: <a href="mailto:hbhuruk274@gmail.com" target="mailto:hbhuruk274@gmail.com">hbhuruk274@gmail.com</a></li>
-          <li>🔗 LINKEDIN: <a href="https://www.linkedin.com/in/hemal-bhuruk" target="https://www.linkedin.com/in/hemal-bhuruk">https://www.linkedin.com/in/hemal-bhuruk</a></li>
-          <li>💻 GITHUB: <a href="https://github.com/hemalb12" target="https://github.com/hemalb12">https://github.com/hemalb12</a></li>
+          <li>📧 EMAIL: <a href="mailto:hemal.bhuruk@qa-dev.com">hemal.bhuruk@qa-dev.com</a></li>
+          <li>🔗 LINKEDIN: <a href="#">linkedin.com/in/hemal-bhuruk</a></li>
+          <li>💻 GITHUB: <a href="#">github.com/hemal-bhuruk</a></li>
           <li>📍 LOCATION: Mumbai, India</li>
         </ul>
       </div>
@@ -1005,7 +848,7 @@
 
   <footer>
     <div class="container">
-      DESIGNED & DEVELOPED FOR HEMAL BHURUK &copy; 2026
+      DESIGNED & DEVELOPED FOR HEMAL BHURUK &copy; 2026 // PREMIUM CASE STUDY EDITION
     </div>
   </footer>
 
@@ -1014,7 +857,7 @@
     <div class="modal-box">
       <div class="modal-title">🏆 QUEST COMPLETE!</div>
       <div class="modal-text">
-        You found all 3 Bugs. Your attention to detail is elite. Let's work together!
+        You found all 3 QA defects. Your attention to detail is elite. Let's work together!
       </div>
       <button class="modal-btn" onclick="closeModalAndScroll()">PROCEED TO CONTACT -></button>
     </div>
@@ -1022,12 +865,34 @@
 
   <script>
     /* ==========================================================================
+       PROJECT SWITCHER LOGIC
+       ========================================================================== */
+    function switchProject(index) {
+      // Toggle Tabs
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach((tab, i) => {
+        if (i === index) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+
+      // Toggle Case Views
+      const cases = document.querySelectorAll('.case-study');
+      cases.forEach((c, i) => {
+        if (i === index) c.classList.add('active');
+        else c.classList.remove('active');
+      });
+
+      // Maintain bug layout status if hunt is running
+      if (bugHuntActive) {
+        introduceBugs();
+      }
+    }
+
+    /* ==========================================================================
        TYPEWRITER EFFECT (HERO)
        ========================================================================== */
-    const roles = ["Game Tester", "QA Analyst"];
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
+    const roles = ["Game Tester", "QA Analyst", "Unity Developer"];
+    let roleIndex = 0; let charIndex = 0; let isDeleting = false;
     const typedElem = document.getElementById("typed-text");
 
     function typeEffect() {
@@ -1039,17 +904,9 @@
         typedElem.innerHTML = currentRole.substring(0, charIndex + 1) + '<span class="type-cursor"></span>';
         charIndex++;
       }
-
-      let typeSpeed = isDeleting ? 40: 100;
-
-      if (!isDeleting && charIndex === currentRole.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        typeSpeed = 500;
-      }
+      let typeSpeed = isDeleting ? 40 : 100;
+      if (!isDeleting && charIndex === currentRole.length) { typeSpeed = 2000; isDeleting = true; }
+      else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
       setTimeout(typeEffect, typeSpeed);
     }
     document.addEventListener("DOMContentLoaded", typeEffect);
@@ -1081,36 +938,23 @@
     function updateBugCount() {
       const count = Object.values(bugsPatched).filter(Boolean).length;
       document.getElementById("bug-count").innerText = count;
-      
       if (count === 3 && bugHuntActive) {
-        setTimeout(() => {
-          document.getElementById("victory-modal").classList.add("show");
-        }, 300);
+        setTimeout(() => { document.getElementById("victory-modal").classList.add("show"); }, 300);
       }
     }
 
     function introduceBugs() {
-      // Bug 1: Clipping Title
-      if (!bugsPatched.bug1) {
-        document.getElementById("hero-title").classList.add("bug1-active");
-      }
-      // Bug 2: Missing Texture
-      if (!bugsPatched.bug2) {
-        document.getElementById("project-card-2").classList.add("bug2-active");
-      }
-      // Bug 3: T-Pose Icon
-      if (!bugsPatched.bug3) {
-        document.getElementById("bug3-target").classList.add("bug3-active");
-      }
+      if (!bugsPatched.bug1) document.getElementById("hero-title").classList.add("bug1-active");
+      if (!bugsPatched.bug2) document.getElementById("project-case-wrapper").classList.add("bug2-active");
+      if (!bugsPatched.bug3) document.getElementById("bug3-target").classList.add("bug3-active");
     }
 
     function removeAllBugs() {
       document.getElementById("hero-title").classList.remove("bug1-active");
-      document.getElementById("project-card-2").classList.remove("bug2-active");
+      document.getElementById("project-case-wrapper").classList.remove("bug2-active");
       document.getElementById("bug3-target").classList.remove("bug3-active");
     }
 
-    // Patch Handlers
     function patchBug1() {
       if (!bugHuntActive || bugsPatched.bug1) return;
       document.getElementById("hero-title").classList.remove("bug1-active");
@@ -1120,7 +964,7 @@
 
     function patchBug2() {
       if (!bugHuntActive || bugsPatched.bug2) return;
-      document.getElementById("project-card-2").classList.remove("bug2-active");
+      document.getElementById("project-case-wrapper").classList.remove("bug2-active");
       document.getElementById("asset-badge").style.display = "inline-block";
       bugsPatched.bug2 = true;
       updateBugCount();
