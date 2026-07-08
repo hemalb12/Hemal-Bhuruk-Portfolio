@@ -4,158 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hemal Bhuruk | Game QA Analyst</title>
-    <!-- Tailwind CSS for modern responsive utilities -->
+    <!-- Tailwind CSS for high-fidelity responsive utility styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Space Grotesk -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* 🌊 The "Electric Oasis" Design Tokens Mapping */
+        :root {
+            --primary: #FAF5FF;       /* Soft Lavender Pearl */
+            --secondary: #1E293B;     /* Corporate Charcoal */
+            --accent: #06B6D4;        /* Cyber Cyan */
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0F172A; /* Deep Slate Charcoal background */
-            color: #FAF5FF; /* Soft Lavender Pearl Text */
+            background-color: var(--primary);
+            color: var(--secondary);
             scroll-behavior: smooth;
         }
+
         h1, h2, h3, .font-heading {
             font-family: 'Space Grotesk', sans-serif;
+            color: var(--secondary);
         }
-        /* Custom scrollbar */
+
+        /* Premium custom scrollbar matching Corporate Charcoal & Cyber Cyan */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0F172A;
+            background: var(--primary);
         }
         ::-webkit-scrollbar-thumb {
-            background: #1E293B;
+            background: #cbd5e1; /* Slate 300 */
             border-radius: 999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #8B5CF6;
+            background: var(--accent);
         }
-        /* Glassmorphism utility card styles */
+
+        /* Glassmorphic card design matching "Electric Oasis" values */
         .glass-card {
-            background: rgba(30, 41, 59, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(30, 41, 59, 0.08);
+            box-shadow: 0 4px 20px -2px rgba(30, 41, 59, 0.03);
         }
-        /* Slide & Fade animation styles */
+
+        /* Darker Charcoal glass cards specifically for the Contact and Details sections */
+        .charcoal-glass-card {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(250, 245, 255, 0.1);
+            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.3);
+        }
+
+        /* SPA transition styles */
         .page-transition {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        /* Subtle radial background pulse glimmers */
+        .bg-oasis-glow {
+            background: radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.08) 0%, rgba(250, 245, 255, 0) 50%),
+                        radial-gradient(circle at 10% 80%, rgba(6, 182, 212, 0.04) 0%, rgba(250, 245, 255, 0) 60%);
+        }
     </style>
 </head>
-<body class="min-h-screen relative overflow-x-hidden">
+<body class="min-h-screen relative overflow-x-hidden bg-oasis-glow">
 
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 w-full z-40 bg-[#0F172A]/80 backdrop-blur-md border-b border-white/5 px-6 py-4">
+    <!-- Fixed Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-40 bg-[#FAF5FF]/85 backdrop-blur-md border-b border-[#1E293B]/5 px-6 py-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="#" class="font-heading text-xl font-bold tracking-tight text-[#FAF5FF] hover:text-[#06B6D4] transition">
-                Hemal Bhuruk<span class="text-[#8B5CF6]">.</span>
+            <a href="#" class="font-heading text-xl font-bold tracking-tight text-[#1E293B] hover:text-[#06B6D4] transition">
+                Hemal Bhuruk<span class="text-[#06B6D4]">.</span>
             </a>
-            <div class="flex items-center gap-6 text-sm font-medium text-[#FAF5FF]/80">
+            <div class="flex items-center gap-6 text-sm font-semibold text-[#1E293B]/80">
                 <a href="#about" class="hover:text-[#06B6D4] transition">About</a>
                 <a href="#projects" class="hover:text-[#06B6D4] transition">Projects</a>
                 <a href="#skills" class="hover:text-[#06B6D4] transition">Skills</a>
-                <a href="#contact" class="hover:text-[#06B6D4] transition">Contact</a>
+                <a href="#contact" class="hover:text-[#06B6D4] transition bg-[#06B6D4]/10 text-[#06B6D4] px-3 py-1 rounded-full border border-[#06B6D4]/20">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Main Dynamic Content Wrapper -->
-    <main class="pt-24 pb-16 px-6 max-w-6xl mx-auto page-transition" id="main-content-section">
+    <main class="pt-28 pb-16 px-6 max-w-6xl mx-auto page-transition" id="main-content-section">
         
         <!-- Hero Segment -->
-        <section id="about" class="mb-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-8">
+        <section id="about" class="mb-24 grid grid-cols-1 md:grid-cols-12 gap-12 items-center pt-8">
             <div class="md:col-span-8 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8B5CF6]/10 text-[#8B5CF6] text-xs font-semibold border border-[#8B5CF6]/20">
-                    <span class="w-2 h-2 rounded-full bg-[#06B6D4] animate-pulse"></span> Available for Opportunities
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06B6D4]/10 text-[#06B6D4] text-xs font-bold border border-[#06B6D4]/20">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#06B6D4] animate-pulse"></span> Active QA Pipelines
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-[#1E293B] leading-tight">
                     Testing Systems. Writing Code.<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6]">Shipping Polished Experiences.</span>
+                    <span class="text-[#06B6D4]">Shipping Polished Experiences.</span>
                 </h1>
-                <p class="text-lg text-[#FAF5FF]/70 max-w-xl">
+                <p class="text-base text-[#1E293B]/70 max-w-xl leading-relaxed">
                     I am a dedicated Game QA Analyst focused on bridging technical engineering and comprehensive testing parameters. Ready to scale games securely worldwide.
                 </p>
-                <div class="flex gap-4">
-                    <a href="#projects" class="px-5 py-2.5 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-medium rounded-lg shadow-lg hover:shadow-purple-500/20 transition-all">
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#projects" class="px-5 py-2.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg shadow-lg shadow-[#06B6D4]/20 transition-all">
                         View QA Projects
                     </a>
-                    <a href="#contact" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-[#FAF5FF] font-medium rounded-lg transition border border-white/5">
+                    <a href="#contact" class="px-5 py-2.5 bg-[#1E293B] hover:bg-slate-800 text-white font-semibold rounded-lg transition-all shadow-sm">
                         Get In Touch
                     </a>
                 </div>
             </div>
-            <!-- Profile Avatar Frame -->
+            <!-- Profile Frame -->
             <div class="md:col-span-4 flex justify-center">
                 <div class="relative group">
-                    <div class="absolute -inset-1.5 bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6] rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-                    <div class="relative w-64 h-64 bg-slate-800 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                        <!-- Ported portrait source to use Self.png -->
-                        <img src="./Self.png" alt="Hemal Bhuruk Photo" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/400x400/1e293b/faf5ff?text=Hemal+Bhuruk'">
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-[#06B6D4] to-[#1E293B] rounded-2xl blur opacity-15 group-hover:opacity-25 transition duration-1000"></div>
+                    <div class="relative w-64 h-64 bg-white rounded-2xl overflow-hidden border border-[#1E293B]/10 shadow-xl">
+                        <img src="./Self.png" alt="Hemal Bhuruk Photo" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/400x400/FAF5FF/1e293b?text=Hemal+Bhuruk'">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section (Grid View) -->
-        <section id="projects" class="mb-20">
-            <div class="mb-8">
-                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-white">Verified Projects & QA Logs</h2>
-                <p class="text-[#FAF5FF]/60 text-sm mt-1">Select a title card to explore full development features, runtime code statistics, and systemic testing pipelines.</p>
+        <section id="projects" class="mb-24">
+            <div class="mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-[#1E293B]">Verified Projects & QA Logs</h2>
+                <p class="text-[#1E293B]/60 text-sm mt-1.5">Select a title card to explore full development features, runtime code statistics, and systemic testing pipelines.</p>
             </div>
 
             <!-- Dynamic Project Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <!-- Project Card 1: Tic Tac Toe -->
-                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer transition hover:-translate-y-1.5 hover:border-[#8B5CF6]/30 hover:shadow-xl" onclick="openProjectDetail('tictactoe')">
-                    <div class="h-48 bg-slate-800 overflow-hidden relative">
-                        <img src="./tictactoe-icon.png" alt="Tic Tac Toe Game" class="w-full h-full object-cover transition group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/1e293b/faf5ff?text=Tic+Tac+Toe'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-xs font-semibold px-2 py-0.5 bg-[#8B5CF6] text-white rounded">UNITY QA</span>
+                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer transition-all hover:-translate-y-1.5 hover:border-[#06B6D4]/40" onclick="openProjectDetail('tictactoe')">
+                    <div class="h-48 bg-slate-100 overflow-hidden relative">
+                        <img src="./tictactoe-icon.png" alt="Tic Tac Toe Game" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/FAF5FF/1e293b?text=Tic+Tac+Toe'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1E293B]/30 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 text-[10px] font-bold tracking-wider px-2 py-0.5 bg-[#1E293B] text-[#FAF5FF] rounded-md">UNITY QA</span>
                     </div>
                     <div class="p-5 space-y-3">
-                        <h3 class="text-lg font-bold text-white group-hover:text-[#06B6D4] transition">Tic Tac Toe Game</h3>
-                        <p class="text-xs text-[#FAF5FF]/70 line-clamp-2">Complete win-logic validation matrix framework built alongside robust automated game-loop recovery procedures.</p>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-[11px] text-[#FAF5FF]/50 font-mono">2026 | Unity C#</span>
-                            <span class="text-xs font-medium text-[#8B5CF6] group-hover:underline flex items-center gap-1">Inspect Logs →</span>
+                        <h3 class="text-lg font-bold text-[#1E293B] group-hover:text-[#06B6D4] transition">Tic Tac Toe Game</h3>
+                        <p class="text-xs text-[#1E293B]/70 line-clamp-2">Complete win-logic validation matrix framework built alongside robust automated game-loop recovery procedures.</p>
+                        <div class="flex items-center justify-between pt-2 border-t border-[#1E293B]/5">
+                            <span class="text-[11px] text-[#1E293B]/50 font-semibold font-mono">2026 | Unity C#</span>
+                            <span class="text-xs font-bold text-[#06B6D4] group-hover:underline flex items-center gap-1">Inspect Logs →</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project Card 2: Squishy Drop -->
-                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer transition hover:-translate-y-1.5 hover:border-[#8B5CF6]/30 hover:shadow-xl" onclick="openProjectDetail('squishydrop')">
-                    <div class="h-48 bg-slate-800 overflow-hidden relative">
-                        <img src="./squishydrop-icon.png" alt="Squishy Drop Game" class="w-full h-full object-cover transition group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/1e293b/faf5ff?text=Squishy+Drop'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-xs font-semibold px-2 py-0.5 bg-[#06B6D4] text-slate-950 rounded">PHYSICS RIGGING</span>
+                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer transition-all hover:-translate-y-1.5 hover:border-[#06B6D4]/40" onclick="openProjectDetail('squishydrop')">
+                    <div class="h-48 bg-slate-100 overflow-hidden relative">
+                        <img src="./squishydrop-icon.png" alt="Squishy Drop Game" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/FAF5FF/1e293b?text=Squishy+Drop'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1E293B]/30 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 text-[10px] font-bold tracking-wider px-2 py-0.5 bg-[#06B6D4] text-white rounded-md">PHYSICS RIGGING</span>
                     </div>
                     <div class="p-5 space-y-3">
-                        <h3 class="text-lg font-bold text-white group-hover:text-[#06B6D4] transition">Squishy Drop Game</h3>
-                        <p class="text-xs text-[#FAF5FF]/70 line-clamp-2">Rigid-body collision profiling and regression cycle tracking across unique, unstable gravity physics layers.</p>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-[11px] text-[#FAF5FF]/50 font-mono">2026 | Physics QA</span>
-                            <span class="text-xs font-medium text-[#8B5CF6] group-hover:underline flex items-center gap-1">Inspect Logs →</span>
+                        <h3 class="text-lg font-bold text-[#1E293B] group-hover:text-[#06B6D4] transition">Squishy Drop Game</h3>
+                        <p class="text-xs text-[#1E293B]/70 line-clamp-2">Rigid-body collision profiling and regression cycle tracking across unique, unstable gravity physics layers.</p>
+                        <div class="flex items-center justify-between pt-2 border-t border-[#1E293B]/5">
+                            <span class="text-[11px] text-[#1E293B]/50 font-semibold font-mono">2026 | Physics QA</span>
+                            <span class="text-xs font-bold text-[#06B6D4] group-hover:underline flex items-center gap-1">Inspect Logs →</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project Card 3: Tap Square Jigsaw -->
-                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer transition hover:-translate-y-1.5 hover:border-[#8B5CF6]/30 hover:shadow-xl" onclick="openProjectDetail('jigsaw')">
-                    <div class="h-48 bg-slate-800 overflow-hidden relative">
-                        <img src="./tapsquarejigsaw-icon.png" alt="Tap Square Jigsaw Game" class="w-full h-full object-cover transition group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/1e293b/faf5ff?text=Tap+Square+Jigsaw'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
-                        <span class="absolute bottom-4 left-4 text-xs font-semibold px-2 py-0.5 bg-violet-600 text-white rounded">GRID LOGIC</span>
+                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer transition-all hover:-translate-y-1.5 hover:border-[#06B6D4]/40" onclick="openProjectDetail('jigsaw')">
+                    <div class="h-48 bg-slate-100 overflow-hidden relative">
+                        <img src="./tapsquarejigsaw-icon.png" alt="Tap Square Jigsaw Game" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/FAF5FF/1e293b?text=Tap+Square+Jigsaw'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1E293B]/30 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 text-[10px] font-bold tracking-wider px-2 py-0.5 bg-sky-600 text-white rounded-md">GRID LOGIC</span>
                     </div>
                     <div class="p-5 space-y-3">
-                        <h3 class="text-lg font-bold text-white group-hover:text-[#06B6D4] transition">Tap Square Jigsaw</h3>
-                        <p class="text-xs text-[#FAF5FF]/70 line-clamp-2">Snapping metrics and modular grid bounds stress testing to confirm pixel-perfect coordinate constraints.</p>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-[11px] text-[#FAF5FF]/50 font-mono">2025 | Mobile SDK</span>
-                            <span class="text-xs font-medium text-[#8B5CF6] group-hover:underline flex items-center gap-1">Inspect Logs →</span>
+                        <h3 class="text-lg font-bold text-[#1E293B] group-hover:text-[#06B6D4] transition">Tap Square Jigsaw</h3>
+                        <p class="text-xs text-[#1E293B]/70 line-clamp-2">Snapping metrics and modular grid bounds stress testing to confirm pixel-perfect coordinate constraints.</p>
+                        <div class="flex items-center justify-between pt-2 border-t border-[#1E293B]/5">
+                            <span class="text-[11px] text-[#1E293B]/50 font-semibold font-mono">2025 | Mobile SDK</span>
+                            <span class="text-xs font-bold text-[#06B6D4] group-hover:underline flex items-center gap-1">Inspect Logs →</span>
                         </div>
                     </div>
                 </div>
@@ -164,114 +192,110 @@
         </section>
 
         <!-- Skills Segment -->
-        <section id="skills" class="mb-20">
-            <h2 class="text-2xl font-bold text-white mb-8">Technical Proficiencies</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="p-5 glass-card rounded-xl space-y-3">
+        <section id="skills" class="mb-24">
+            <h2 class="text-2xl font-bold text-[#1E293B] mb-10">Technical Proficiencies</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="p-6 glass-card rounded-xl space-y-4">
                     <div class="text-[#06B6D4] text-lg font-bold">QA Testing</div>
-                    <ul class="text-xs space-y-2 text-[#FAF5FF]/70">
-                        <li>• Black Box & Gray Box Testing</li>
-                        <li>• Automated Regression Cycles</li>
-                        <li>• Defect Reporting & JIRA Logs</li>
-                        <li>• Stress & Boundaries Testing</li>
+                    <ul class="text-xs space-y-3 text-[#1E293B]/80 font-medium">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> Black Box & Gray Box</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> Automated Regression</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> Defect Logs & JIRA</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> Stress & Boundary Tests</li>
                     </ul>
                 </div>
-                <div class="p-5 glass-card rounded-xl space-y-3">
-                    <div class="text-[#8B5CF6] text-lg font-bold">Development</div>
-                    <ul class="text-xs space-y-2 text-[#FAF5FF]/70">
-                        <li>• Unity Game Engine (C#)</li>
-                        <li>• 2D/3D Object Physics Rigging</li>
-                        <li>• Responsive Game UI Design</li>
-                        <li>• Mobile & WebGL Compiler Systems</li>
+                <div class="p-6 glass-card rounded-xl space-y-4">
+                    <div class="text-[#1E293B] text-lg font-bold">Development</div>
+                    <ul class="text-xs space-y-3 text-[#1E293B]/80 font-medium">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> Unity Engine (C#)</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> Object Physics Rigging</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> Dynamic Game UI</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> WebGL Deployments</li>
                     </ul>
                 </div>
-                <div class="p-5 glass-card rounded-xl space-y-3">
+                <div class="p-6 glass-card rounded-xl space-y-4">
                     <div class="text-[#06B6D4] text-lg font-bold">Tools & Systems</div>
-                    <ul class="text-xs space-y-2 text-[#FAF5FF]/70">
-                        <li>• Git / GitHub Version Control</li>
-                        <li>• Unity Profiler / ADB Logs</li>
-                        <li>• JIRA Bug Management</li>
-                        <li>• TestRail Audit Suites</li>
+                    <ul class="text-xs space-y-3 text-[#1E293B]/80 font-medium">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> Git Version Control</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> Unity Profiler Modules</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> JIRA Scrum Suites</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span> TestRail Frameworks</li>
                     </ul>
                 </div>
-                <div class="p-5 glass-card rounded-xl space-y-3">
-                    <div class="text-[#8B5CF6] text-lg font-bold">Methodologies</div>
-                    <ul class="text-xs space-y-2 text-[#FAF5FF]/70">
-                        <li>• Agile / Scrum Framework</li>
-                        <li>• Test-Driven Development (TDD)</li>
-                        <li>• Detailed Step Reproduction Logs</li>
-                        <li>• Rigorous Build Releases</li>
+                <div class="p-6 glass-card rounded-xl space-y-4">
+                    <div class="text-[#1E293B] text-lg font-bold">Methodologies</div>
+                    <ul class="text-xs space-y-3 text-[#1E293B]/80 font-medium">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> Agile & Sprint Cycles</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> Test-Driven Dev (TDD)</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> Bug Step Reproduction</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#1E293B]"></span> Secure Build Releases</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Get In Touch Contact Section (Perfect Match to Screenshot_20260706-230340.png and Video) -->
+        <!-- Get In Touch Section (Light-themed Electric Oasis Style, Matching Layout of Screenshot 2026-07-08 210136.png) -->
         <section id="contact" class="pt-8">
             <div class="text-center max-w-xl mx-auto mb-12 space-y-2">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white">Get In Touch</h2>
-                <p class="text-[#FAF5FF]/60 text-sm">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#1E293B]">Get In Touch</h2>
+                <p class="text-[#1E293B]/60 text-sm">
                     Interested in working together or have a question? Feel free to reach out.
                 </p>
             </div>
 
-            <!-- 2x2 Clean Minimalist Contact Card Grid -->
+            <!-- 2x2 Grid of Charcoal glass cards with Cyan active parameters -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 
                 <!-- Card 1: Location -->
-                <div class="glass-card p-6 rounded-2xl flex items-center gap-5 border border-white/5 transition hover:border-[#8B5CF6]/30 hover:shadow-lg">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/10 flex items-center justify-center text-violet-500 border border-violet-500/20 shrink-0">
-                        <!-- Map Pin SVG -->
+                <div class="charcoal-glass-card p-6 rounded-2xl flex items-center gap-5 transition duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-[#06B6D4]/10 flex items-center justify-center text-[#06B6D4] border border-[#06B6D4]/20 shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                     </div>
                     <div>
-                        <div class="text-[#FAF5FF]/50 text-xs tracking-wide">Location</div>
-                        <div class="text-white text-base font-semibold font-heading">Mumbai, India</div>
+                        <div class="text-white/50 text-xs font-semibold tracking-wide uppercase">Location</div>
+                        <div class="text-white text-base font-bold font-heading">Mumbai, India</div>
                     </div>
                 </div>
 
                 <!-- Card 2: Email -->
-                <a href="mailto:hbhuruk@gmail.com" class="glass-card p-6 rounded-2xl flex items-center gap-5 border border-white/5 transition hover:border-[#8B5CF6]/40 hover:bg-slate-800/40 hover:shadow-lg group">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/10 flex items-center justify-center text-violet-500 border border-violet-500/20 shrink-0 transition group-hover:bg-violet-600/25 group-hover:text-violet-400">
-                        <!-- Envelope SVG -->
+                <a href="mailto:hbhuruk@gmail.com" class="charcoal-glass-card p-6 rounded-2xl flex items-center gap-5 transition duration-300 hover:border-[#06B6D4]/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-[#06B6D4]/10 flex items-center justify-center text-[#06B6D4] border border-[#06B6D4]/20 shrink-0 transition group-hover:bg-[#06B6D4] group-hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
                     <div class="min-w-0">
-                        <div class="text-[#FAF5FF]/50 text-xs tracking-wide">Email</div>
-                        <div class="text-[#FAF5FF] text-base font-semibold font-heading truncate group-hover:text-[#06B6D4] transition">hbhuruk@gmail.com</div>
+                        <div class="text-white/50 text-xs font-semibold tracking-wide uppercase">Email</div>
+                        <div class="text-white text-base font-bold font-heading truncate group-hover:text-[#06B6D4] transition">hbhuruk@gmail.com</div>
                     </div>
                 </a>
 
                 <!-- Card 3: LinkedIn -->
-                <a href="https://www.linkedin.com/in/hemal-bhuruk" target="_blank" class="glass-card p-6 rounded-2xl flex items-center gap-5 border border-white/5 transition hover:border-[#8B5CF6]/40 hover:bg-slate-800/40 hover:shadow-lg group">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/10 flex items-center justify-center text-violet-500 border border-violet-500/20 shrink-0 transition group-hover:bg-violet-600/25 group-hover:text-violet-400">
-                        <!-- LinkedIn Icon SVG -->
+                <a href="https://www.linkedin.com/in/hemal-bhuruk" target="_blank" class="charcoal-glass-card p-6 rounded-2xl flex items-center gap-5 transition duration-300 hover:border-[#06B6D4]/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-[#06B6D4]/10 flex items-center justify-center text-[#06B6D4] border border-[#06B6D4]/20 shrink-0 transition group-hover:bg-[#06B6D4] group-hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                         </svg>
                     </div>
                     <div>
-                        <div class="text-[#FAF5FF]/50 text-xs tracking-wide">LinkedIn</div>
-                        <div class="text-[#FAF5FF] text-base font-semibold font-heading group-hover:text-[#06B6D4] transition">Connect with me</div>
+                        <div class="text-white/50 text-xs font-semibold tracking-wide uppercase">LinkedIn</div>
+                        <div class="text-white text-base font-bold font-heading group-hover:text-[#06B6D4] transition">Connect with me</div>
                     </div>
                 </a>
 
-                <!-- Card 4: GitHub -->
-                <a href="https://github.com/hemalb" target="_blank" class="glass-card p-6 rounded-2xl flex items-center gap-5 border border-white/5 transition hover:border-[#8B5CF6]/40 hover:bg-slate-800/40 hover:shadow-lg group">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/10 flex items-center justify-center text-violet-500 border border-violet-500/20 shrink-0 transition group-hover:bg-violet-600/25 group-hover:text-violet-400">
-                        <!-- GitHub Icon SVG -->
+                <!-- Card 4: GitHub / Website -->
+                <a href="https://github.com/hemalb" target="_blank" class="charcoal-glass-card p-6 rounded-2xl flex items-center gap-5 transition duration-300 hover:border-[#06B6D4]/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-[#06B6D4]/10 flex items-center justify-center text-[#06B6D4] border border-[#06B6D4]/20 shrink-0 transition group-hover:bg-[#06B6D4] group-hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </div>
                     <div class="min-w-0">
-                        <div class="text-[#FAF5FF]/50 text-xs tracking-wide">GitHub</div>
-                        <div class="text-[#FAF5FF] text-base font-semibold font-heading truncate group-hover:text-[#06B6D4] transition">github.com/hemalb</div>
+                        <div class="text-white/50 text-xs font-semibold tracking-wide uppercase">GitHub</div>
+                        <div class="text-white text-base font-bold font-heading truncate group-hover:text-[#06B6D4] transition">github.com/hemalb</div>
                     </div>
                 </a>
 
@@ -279,68 +303,66 @@
         </section>
     </main>
 
-    <!-- Detailed Project View Container (Initially Hidden, slides in precisely like the video) -->
+    <!-- Detailed Project View Container (Initially Hidden, slides in smoothly matching video guidelines) -->
     <div id="project-detail-view" class="hidden min-h-screen pt-24 pb-16 px-6 max-w-6xl mx-auto page-transition opacity-0 transform translate-y-8">
         
         <!-- Back To Projects Link -->
-        <button onclick="closeProjectDetail()" class="inline-flex items-center gap-2 text-sm text-[#FAF5FF]/70 hover:text-[#06B6D4] transition mb-6 font-semibold">
-            <!-- Back arrow icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <button onclick="closeProjectDetail()" class="inline-flex items-center gap-2 text-sm text-[#1E293B]/70 hover:text-[#06B6D4] transition-all mb-8 font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Projects
         </button>
 
-        <!-- Project Header Hero Banner with Title Overlay -->
-        <div class="relative rounded-2xl overflow-hidden h-[340px] md:h-[450px] mb-8 group border border-white/10 shadow-2xl">
-            <img id="detail-hero-banner" src="" alt="Project Banner" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/20"></div>
+        <!-- Project Header Hero Banner with Title Overlay (Matches Screen Recording 2026-07-08 205410.mp4) -->
+        <div class="relative rounded-2xl overflow-hidden h-[340px] md:h-[450px] mb-10 border border-[#1E293B]/10 shadow-2xl bg-slate-900">
+            <img id="detail-hero-banner" src="" alt="Project Banner" class="w-full h-full object-cover opacity-85">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-[#1E293B]/40 to-transparent"></div>
             
-            <!-- Metadata & Title absolute overlay (Exact Visual match to Video) -->
+            <!-- Metadata & Title overlay -->
             <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10 space-y-4 max-w-3xl">
                 <h1 id="detail-title" class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight"></h1>
                 <div class="flex flex-wrap items-center gap-2 md:gap-3">
-                    <span id="detail-tag-role" class="text-xs font-semibold px-3 py-1 bg-violet-600 text-white rounded-full"></span>
-                    <span id="detail-tag-studio" class="text-xs font-medium px-3 py-1 bg-slate-800/80 text-white/90 rounded-full border border-white/5"></span>
-                    <span id="detail-tag-year" class="text-xs font-medium px-3 py-1 bg-slate-800/80 text-white/90 rounded-full border border-white/5"></span>
-                    <span id="detail-tag-install" class="text-xs font-medium px-3 py-1 bg-[#06B6D4]/20 text-[#06B6D4] rounded-full border border-[#06B6D4]/30"></span>
+                    <span id="detail-tag-role" class="text-xs font-bold tracking-wider px-3 py-1 bg-[#06B6D4] text-white rounded-full"></span>
+                    <span id="detail-tag-studio" class="text-xs font-semibold px-3 py-1 bg-white/10 backdrop-blur-md text-white/90 rounded-full border border-white/10"></span>
+                    <span id="detail-tag-year" class="text-xs font-semibold px-3 py-1 bg-white/10 backdrop-blur-md text-white/90 rounded-full border border-white/10"></span>
+                    <span id="detail-tag-install" class="text-xs font-bold px-3 py-1 bg-[#FAF5FF] text-[#1E293B] rounded-full shadow-sm"></span>
                 </div>
             </div>
         </div>
 
-        <!-- Two Column Content Grid (Mirroring Video Layout) -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <!-- Two Column Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
             
             <!-- Left Main Column (65% width) -->
-            <div class="md:col-span-8 space-y-8">
+            <div class="md:col-span-8 space-y-10">
                 
                 <!-- About the Project segment -->
                 <div class="space-y-3">
-                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white border-b border-white/5 pb-2">About the Project</h2>
-                    <p id="detail-description-text" class="text-sm md:text-base text-[#FAF5FF]/70 leading-relaxed"></p>
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#1E293B] border-b border-[#1E293B]/10 pb-2">About the Project</h2>
+                    <p id="detail-description-text" class="text-sm md:text-base text-[#1E293B]/80 leading-relaxed"></p>
                 </div>
 
-                <!-- My Responsibilities segment (Bulleted steps like the video) -->
+                <!-- My Responsibilities segment -->
                 <div class="space-y-4">
-                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white border-b border-white/5 pb-2">My Responsibilities</h2>
-                    <ul id="detail-responsibilities-list" class="space-y-3.5 text-sm md:text-base text-[#FAF5FF]/70">
-                        <!-- Dynamic bullets loaded by JavaScript -->
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#1E293B] border-b border-[#1E293B]/10 pb-2">My Responsibilities</h2>
+                    <ul id="detail-responsibilities-list" class="space-y-3.5 text-sm md:text-base text-[#1E293B]/80">
+                        <!-- Dynamic bullet loops loaded via JavaScript -->
                     </ul>
                 </div>
 
-                <!-- Video Trailer / Gameplay Demonstration segment -->
+                <!-- Product Trailer segment (Matches video showcase) -->
                 <div class="space-y-4">
-                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white border-b border-white/5 pb-2">Product Trailer</h2>
-                    <!-- Placeholder resembling Youtube trailer layout -->
-                    <div class="relative rounded-xl overflow-hidden aspect-video bg-slate-900 border border-white/5 group shadow-lg">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/30 group-hover:bg-slate-950/40 transition">
-                            <!-- Youtube Play Style SVG Button -->
-                            <div class="w-16 h-12 bg-red-600 rounded-2xl flex items-center justify-center text-white shadow-xl transition transform group-hover:scale-105 cursor-pointer">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#1E293B] border-b border-[#1E293B]/10 pb-2">Product Trailer</h2>
+                    <div class="relative rounded-xl overflow-hidden aspect-video bg-[#1E293B] border border-[#1E293B]/10 group shadow-lg">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#1E293B]/20 group-hover:bg-[#1E293B]/40 transition duration-300">
+                            <!-- Play SVG Button -->
+                            <div class="w-16 h-12 bg-[#06B6D4] hover:bg-[#0891B2] rounded-2xl flex items-center justify-center text-white shadow-xl transition transform group-hover:scale-105 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" viewBox="0 0 24 24">
                                     <path d="M8 5v14l11-7z"/>
                                 </svg>
                             </div>
-                            <span class="text-xs text-white/50 mt-3 font-mono">Watch Trailer Simulation Build</span>
+                            <span class="text-xs text-white/80 mt-3 font-semibold tracking-wider font-mono bg-[#1E293B]/60 px-3 py-1 rounded-full">Watch Trailer Simulation Build</span>
                         </div>
                         <img id="detail-trailer-image" src="" alt="Gameplay Trailer Backdrop" class="w-full h-full object-cover">
                     </div>
@@ -348,8 +370,8 @@
 
                 <!-- Gameplay Snapshot segment -->
                 <div class="space-y-4">
-                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white border-b border-white/5 pb-2">Gameplay Overview</h2>
-                    <div class="rounded-xl overflow-hidden border border-white/5 shadow-lg bg-slate-900">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#1E293B] border-b border-[#1E293B]/10 pb-2">Gameplay Overview</h2>
+                    <div class="rounded-xl overflow-hidden border border-[#1E293B]/10 shadow-lg bg-slate-200">
                         <img id="detail-gameplay-image" src="" alt="Gameplay Demonstration Snapshot" class="w-full h-auto object-cover">
                     </div>
                 </div>
@@ -359,31 +381,31 @@
             <!-- Right Sidebar Column (35% width) -->
             <div class="md:col-span-4 space-y-6 md:sticky md:top-24">
                 
-                <!-- Project Details Box -->
-                <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-4 shadow-xl">
-                    <h3 class="text-base font-bold text-white border-b border-white/10 pb-2">Project Details</h3>
+                <!-- Project Details Box (Styled match to light layout specs) -->
+                <div class="glass-card p-6 rounded-2xl border border-[#1E293B]/10 space-y-4 shadow-xl">
+                    <h3 class="text-base font-bold text-[#1E293B] border-b border-[#1E293B]/10 pb-2">Project Details</h3>
                     
                     <div class="space-y-3.5 text-xs md:text-sm">
                         <div class="flex justify-between items-center">
-                            <span class="text-[#FAF5FF]/50 font-medium">Studio</span>
-                            <span id="detail-sidebar-studio" class="text-white font-semibold"></span>
+                            <span class="text-[#1E293B]/60 font-semibold">Studio</span>
+                            <span id="detail-sidebar-studio" class="text-[#1E293B] font-bold"></span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-[#FAF5FF]/50 font-medium">Role</span>
-                            <span id="detail-sidebar-role" class="text-white font-semibold"></span>
+                            <span class="text-[#1E293B]/60 font-semibold">Role</span>
+                            <span id="detail-sidebar-role" class="text-[#1E293B] font-bold"></span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-[#FAF5FF]/50 font-medium">Year</span>
-                            <span id="detail-sidebar-year" class="text-white font-semibold"></span>
+                            <span class="text-[#1E293B]/60 font-semibold">Year</span>
+                            <span id="detail-sidebar-year" class="text-[#1E293B] font-bold"></span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-[#FAF5FF]/50 font-medium">Installs</span>
-                            <span id="detail-sidebar-install" class="text-[#06B6D4] font-bold"></span>
+                            <span class="text-[#1E293B]/60 font-semibold">Installs</span>
+                            <span id="detail-sidebar-install" class="text-[#06B6D4] font-bold uppercase"></span>
                         </div>
                     </div>
 
-                    <!-- Button: Link Redirection inside details box (as in video) -->
-                    <a href="https://github.com/hemalb" target="_blank" class="block w-full py-2.5 bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] hover:from-[#7C3AED] hover:to-[#4F46E5] text-white text-center text-xs font-semibold rounded-lg shadow-lg hover:shadow-purple-500/20 transition-all">
+                    <!-- Button: Link Redirection inside details box -->
+                    <a href="https://github.com/hemalb" target="_blank" class="block w-full py-2.5 bg-gradient-to-r from-[#1E293B] to-[#1E293B]/80 hover:from-[#06B6D4] hover:to-[#0891B2] text-white text-center text-xs font-bold rounded-lg shadow-md transition-all">
                         Visit Official Codebase
                     </a>
                 </div>
@@ -396,7 +418,7 @@
 
     <!-- Interactive Dynamic Routing JavaScript -->
     <script>
-        // Highly descriptive, verified data structure for Hemal Bhuruk's Projects (Matching exact video details structure)
+        // Highly descriptive, verified data structure for Hemal Bhuruk's Projects (With exact match details structure)
         const PROJECT_DATA = {
             tictactoe: {
                 title: "Tic Tac Toe Framework",
@@ -493,9 +515,9 @@
                 listContainer.innerHTML = '';
                 data.responsibilities.forEach(item => {
                     const li = document.createElement('li');
-                    li.className = "flex gap-3 items-start";
+                    li.className = "flex gap-3 items-start text-[#1E293B]/85";
                     li.innerHTML = `
-                        <span class="text-violet-500 font-semibold text-base mt-0.5 shrink-0">✓</span>
+                        <span class="text-[#06B6D4] font-bold text-base mt-0.5 shrink-0">✓</span>
                         <span class="leading-relaxed">${item}</span>
                     `;
                     listContainer.appendChild(li);
