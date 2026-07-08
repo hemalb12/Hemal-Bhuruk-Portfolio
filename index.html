@@ -308,33 +308,11 @@
       box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
       transform: rotate(3deg);
       transition: transform 0.3s;
+      padding: 12px;
     }
 
     .hero-avatar:hover .avatar-frame {
       transform: rotate(0deg);
-    }
-
-    .avatar-inner {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      color: var(--text-main);
-      border: 2px dashed var(--accent-cyan);
-      border-radius: 12px;
-      width: 85%;
-      height: 85%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #FAF5FF 0%, #EFF6FF 100%);
-    }
-
-    .avatar-sub {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent-cyan);
-      font-weight: bold;
-      margin-top: 8px;
     }
 
     /* ==========================================================================
@@ -396,22 +374,26 @@
     }
 
     .project-thumb {
-      height: 180px;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-bottom: 1px solid var(--border-light);
       position: relative;
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--text-main);
-      font-weight: 700;
-      letter-spacing: 1px;
+      overflow: hidden;
+      background: var(--bg-main);
     }
 
-    .thumb-1 { background: linear-gradient(135deg, #F3E8FF, #E0E7FF); }
-    .thumb-2 { background: linear-gradient(135deg, #E0F2FE, #ECFEFF); }
-    .thumb-3 { background: linear-gradient(135deg, #FCE7F3, #F3E8FF); }
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-thumb img {
+      transform: scale(1.05);
+    }
 
     .project-content {
       padding: 24px;
@@ -681,8 +663,8 @@
       cursor: crosshair !important;
     }
 
-    .bug2-active #project-thumb-2 span {
-      display: none !important;
+    .bug2-active #project-thumb-2 img {
+      opacity: 0 !important;
     }
 
     .asset-badge {
@@ -694,6 +676,8 @@
       padding: 6px 10px;
       font-size: 0.8rem;
       border-radius: 4px;
+      position: absolute;
+      z-index: 20;
     }
 
     /* Bug 3: T-Pose / Rotated Icon */
@@ -834,10 +818,8 @@
     </div>
     <div class="hero-avatar">
       <div class="avatar-frame">
-        <div class="avatar-inner">
-          <span>HB</span>
-          <span class="avatar-sub">QA // DEV</span>
-        </div>
+        <!-- PLACED PORTRAIT IMAGE -->
+        <img src="Self.jpg" alt="Hemal Bhuruk Profile Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
       </div>
     </div>
   </section>
@@ -862,8 +844,9 @@
       
       <!-- Project 1 -->
       <div class="project-card">
-        <div class="project-thumb thumb-1">
-          <span>TIC TAC TOE: EMOJI</span>
+        <div class="project-thumb">
+          <!-- PLACED TIC TAC TOE ICON -->
+          <img src="tictactoe-icon.png" alt="Tic Tac Toe Game">
         </div>
         <div class="project-content">
           <div class="project-title">
@@ -887,8 +870,9 @@
 
       <!-- Project 2 (Contains Bug 2 Target) -->
       <div class="project-card" id="project-card-2" onclick="patchBug2()">
-        <div class="project-thumb thumb-2" id="project-thumb-2">
-          <span>SQUISHY DROP: ASMR</span>
+        <div class="project-thumb" id="project-thumb-2">
+          <!-- PLACED SQUISHY DROP ICON -->
+          <img src="squishydrop-icon.jpg" alt="Squishy Drop Game">
           <div id="asset-badge" class="asset-badge">Asset Loaded!</div>
         </div>
         <div class="project-content">
@@ -913,8 +897,9 @@
 
       <!-- Project 3 -->
       <div class="project-card">
-        <div class="project-thumb thumb-3">
-          <span>TAP SQUARE JIGSAW</span>
+        <div class="project-thumb">
+          <!-- PLACED TAP SQUARE JIGSAW ICON -->
+          <img src="tapsquarejigsaw-icon.jpg" alt="Tap Square Jigsaw Game">
         </div>
         <div class="project-content">
           <div class="project-title">
@@ -1137,7 +1122,6 @@
       if (!bugHuntActive || bugsPatched.bug2) return;
       document.getElementById("project-card-2").classList.remove("bug2-active");
       document.getElementById("asset-badge").style.display = "inline-block";
-      document.getElementById("project-thumb-2").style.background = "linear-gradient(135deg, #E0F2FE, #ECFEFF)";
       bugsPatched.bug2 = true;
       updateBugCount();
     }
