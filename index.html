@@ -910,9 +910,9 @@
             Relaxing tile rotation puzzle game with hand-painted watercolour scenes. Performed exploratory and regression testing on tile rotation mechanics, UI responsiveness, and pre-release stability validation.
           </p>
           <div class="tech-stack">
-            <span class="tech-tag">UI/UX Testing</span>
-            <span class="tech-tag">Agile/Scrum</span>
-            <span class="tech-tag">Pre-Release QA</span>
+            <span class="tech-tag">Exploratory Testing</span>
+            <span class="tech-tag">Regression Testing</span>
+            <span class="tech-tag">UI/UX</span>
           </div>
           <div class="project-links">
             <a href="#" class="btn-link">Live Demo -></a>
@@ -926,45 +926,36 @@
 
   <!-- SKILLS SECTION -->
   <section id="skills" class="skills container">
-    <h2 class="section-header">Technical Skillsets</h2>
+    <h2 class="section-header">Testing Toolkit & Technical Skills</h2>
     <div class="skills-grid">
       
-      <!-- Category 1 -->
       <div class="skill-category">
-        <h3>// QUALITY ASSURANCE</h3>
+        <h3>Core QA Specializations</h3>
         <div class="skill-list">
-          <div class="skill-item">Manual Testing</div>
-          <div class="skill-item">Functional & Regression</div>
-          <div class="skill-item">Exploratory & Compatibility</div>
-          <div class="skill-item">Cross-Platform (PC/Mobile/Web)</div>
-          <div class="skill-item">Test Case Design</div>
-          <div class="skill-item">UI/UX & Performance Testing</div>
+          <span class="skill-item">Functional Testing</span>
+          <span class="skill-item">Regression Testing</span>
+          <span class="skill-item">Compatibility Testing</span>
+          <span class="skill-item">Performance Validation</span>
+          <span class="skill-item">Compliance & Certs</span>
         </div>
       </div>
 
-      <!-- Category 2 -->
-      <div class="skill-category">
-        <h3>// TEST MANAGEMENT</h3>
+      <div class="skill-category" id="skill-card-bug3" onclick="patchBug3()">
+        <h3>Tools & Engine Infrastructure</h3>
         <div class="skill-list">
-          <div class="skill-item" id="bug3-target" onclick="patchBug3()">
-            <span class="skill-icon" id="skill-icon">⚙️</span> Jira (Advanced)
-          </div>
-          <div class="skill-item">Trello</div>
-          <div class="skill-item">Agile / Scrum Workflows</div>
-          <div class="skill-item">Test Cycle Management</div>
-          <div class="skill-item">Build & Release Testing</div>
+          <span class="skill-item"><span class="skill-icon">🛠️</span> Unity Engine</span>
+          <span class="skill-item"><span class="skill-icon">🛠️</span> Jira / Confluence</span>
+          <span class="skill-item"><span class="skill-icon">🛠️</span> Git Version Control</span>
+          <span class="skill-item"><span class="skill-icon">🛠️</span> Android Studio / Xcode</span>
         </div>
       </div>
 
-      <!-- Category 3 -->
       <div class="skill-category">
-        <h3>// GAME QA & TECH</h3>
+        <h3>Technical Programming</h3>
         <div class="skill-list">
-          <div class="skill-item">Gameplay & Balance Validation</div>
-          <div class="skill-item">Level Design Testing</div>
-          <div class="skill-item">Player Experience (UX)</div>
-          <div class="skill-item">Game Mechanics Validation</div>
-          <div class="skill-item">Unity / Developer Background</div>
+          <span class="skill-item">C# (Unity script structure)</span>
+          <span class="skill-item">HTML5 / CSS3</span>
+          <span class="skill-item">JavaScript (ES6+)</span>
         </div>
       </div>
 
@@ -973,168 +964,157 @@
 
   <!-- CONTACT SECTION -->
   <section id="contact" class="contact container">
-    <h2 class="section-header">Establish Connection</h2>
+    <h2 class="section-header">Initiate Communication</h2>
     <div class="contact-wrapper">
       <div class="contact-info">
-        <h3>READY TO DEPLOY HIGH-QUALITY TITLES?</h3>
-        <p style="color: var(--text-muted); margin-bottom: 20px;">Whether you need launch validation, rigorous regression cycles, or an experienced tester who speaks developer language, let's connect.</p>
+        <h3>Let's collaborate on quality.</h3>
+        <p>Looking to elevate your project's stability, lock down test pipelines, or talk high-level QA strategy? Drop a message directly through the comms matrix or reach out over standard protocols.</p>
         <ul class="contact-links">
-          <li>📧 EMAIL: <a href="mailto:hbhuruk274@gmail.com">hbhuruk274@gmail.com</a></li>
-          <li>🔗 LINKEDIN: <a href="#">linkedin.com/in/hemal-bhuruk</a></li>
-          <li>💻 GITHUB: <a href="#">github.com/hemal-bhuruk</a></li>
-          <li>📍 LOCATION: Mumbai, India</li>
+          <li><strong>Email:</strong> <a href="mailto:hemal.bhuruk@example.com">hemal.bhuruk@example.com</a></li>
+          <li><strong>LinkedIn:</strong> <a href="#">linkedin.com/in/hemalbhuruk</a></li>
+          <li><strong>GitHub:</strong> <a href="#">github.com/hemalbhuruk</a></li>
         </ul>
       </div>
-      <form onsubmit="event.preventDefault(); alert('Transmission Sent! Hemal will reply shortly.');">
+      <form action="#" onsubmit="event.preventDefault(); alert('Transmission delivered successfully!');">
         <div class="form-group">
-          <label>NAME</label>
-          <input type="text" class="form-control" placeholder="Enter your name..." required>
+          <label for="name">Sender ID / Name</label>
+          <input type="text" id="name" class="form-control" placeholder="e.g. Lead Producer Alexander" required>
         </div>
         <div class="form-group">
-          <label>EMAIL</label>
-          <input type="email" class="form-control" placeholder="Enter your email..." required>
+          <label for="email">Comms Address / Email</label>
+          <input type="email" id="email" class="form-control" placeholder="name@studio.com" required>
         </div>
         <div class="form-group">
-          <label>MESSAGE</label>
-          <textarea class="form-control" rows="4" placeholder="Discussing a QA opportunity..." required></textarea>
+          <label for="msg">Transmission Core / Message</label>
+          <textarea id="msg" class="form-control" rows="4" placeholder="Type your briefing data here..." required></textarea>
         </div>
-        <button type="submit" class="submit-btn">SEND MESSAGE -></button>
+        <button type="submit" class="submit-btn">SEND TRANSMISSION</button>
       </form>
     </div>
   </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
-      DESIGNED & DEVELOPED FOR HEMAL BHURUK &copy; 2026
+      &copy; 2026 HEMAL BHURUK // ALL PROTOCOLS DEPLOYED.
     </div>
   </footer>
 
   <!-- VICTORY MODAL -->
   <div id="victory-modal" class="modal-overlay">
     <div class="modal-box">
-      <div class="modal-title">🏆 QUEST COMPLETE!</div>
-      <div class="modal-text">
-        You found all 3 QA defects. Your attention to detail is elite. Let's work together!
-      </div>
-      <button class="modal-btn" onclick="closeModalAndScroll()">PROCEED TO CONTACT -></button>
+      <h2 class="modal-title">🎉 BUILD VERIFIED!</h2>
+      <p class="modal-text">Excellent work, Tracker! All 3 intentional defects have been successfully neutralized, hotfixed, and logged into the pipeline.</p>
+      <button class="modal-btn" onclick="closeModal()">Return to Matrix</button>
     </div>
   </div>
 
+  <!-- GAMIFICATION LOGIC MATRIX -->
   <script>
-    /* ==========================================================================
-       TYPEWRITER EFFECT (HERO)
-       ========================================================================== */
-    const roles = ["Game Tester", "QA Analyst"];
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typedElem = document.getElementById("typed-text");
-
-    function typeEffect() {
-      const currentRole = roles[roleIndex];
-      if (isDeleting) {
-        typedElem.innerHTML = currentRole.substring(0, charIndex - 1) + '<span class="type-cursor"></span>';
-        charIndex--;
-      } else {
-        typedElem.innerHTML = currentRole.substring(0, charIndex + 1) + '<span class="type-cursor"></span>';
-        charIndex++;
-      }
-
-      let typeSpeed = isDeleting ? 40 : 100;
-
-      if (!isDeleting && charIndex === currentRole.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        typeSpeed = 500;
-      }
-      setTimeout(typeEffect, typeSpeed);
-    }
-    document.addEventListener("DOMContentLoaded", typeEffect);
-
-    /* ==========================================================================
-       INTERACTIVE BUG HUNT GAMIFICATION LOGIC
-       ========================================================================== */
     let bugHuntActive = false;
     let bugsPatched = { bug1: false, bug2: false, bug3: false };
+    const totalBugs = 3;
 
+    // Typing effect logic
+    const roles = ["GAME QUALITY ASSURANCE ANALYST", "UNITY DEVELOPER", "TECHNICAL BETA TESTER"];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const typedTextEl = document.getElementById("typed-text");
+
+    function typeEffect() {
+      const currentRole = roles[roleIdx];
+      if (isDeleting) {
+        typedTextEl.innerHTML = currentRole.substring(0, charIdx - 1) + '<span class="type-cursor"></span>';
+        charIdx--;
+      } else {
+        typedTextEl.innerHTML = currentRole.substring(0, charIdx + 1) + '<span class="type-cursor"></span>';
+        charIdx++;
+      }
+
+      let typeSpeed = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIdx === currentRole.length) {
+        typeSpeed = 1800; // Pause at full word
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        typeSpeed = 400; // Brief rest before next word
+      }
+
+      setTimeout(typeEffect, typeSpeed);
+    }
+    document.addEventListener("DOMContentLoaded", () => setTimeout(typeEffect, 500));
+
+    // Gamification System
     function toggleBugHunt() {
       bugHuntActive = !bugHuntActive;
       const btn = document.getElementById("bug-toggle-btn");
       const banner = document.getElementById("alert-banner");
-
+      
       if (bugHuntActive) {
-        btn.innerHTML = "BUG HUNT: ON 🟢";
         btn.classList.add("active");
+        btn.innerText = "BUG HUNT: ACTIVE 🎯";
         banner.style.display = "block";
-        introduceBugs();
+        document.body.classList.add("bug-hunt-on");
+        
+        // Inject active bugs if not patched
+        if (!bugsPatched.bug1) document.getElementById("hero-title").classList.add("bug1-active");
+        if (!bugsPatched.bug2) document.body.classList.add("bug2-active");
+        if (!bugsPatched.bug3) document.getElementById("skill-card-bug3").classList.add("bug3-active");
       } else {
-        btn.innerHTML = "BUG HUNT: OFF 🔘";
         btn.classList.remove("active");
+        btn.innerText = "BUG HUNT: OFF 🔘";
         banner.style.display = "none";
-        removeAllBugs();
+        removeBugClasses();
       }
+    }
+
+    function removeBugClasses() {
+      document.getElementById("hero-title").classList.remove("bug1-active");
+      document.body.classList.remove("bug2-active");
+      document.getElementById("skill-card-bug3").classList.remove("bug3-active");
     }
 
     function updateBugCount() {
       const count = Object.values(bugsPatched).filter(Boolean).length;
       document.getElementById("bug-count").innerText = count;
-      
-      if (count === 3 && bugHuntActive) {
+      if (count === totalBugs) {
         setTimeout(() => {
           document.getElementById("victory-modal").classList.add("show");
-        }, 300);
+        }, 400);
       }
     }
 
-    function introduceBugs() {
-      // Bug 1: Clipping Title
-      if (!bugsPatched.bug1) {
-        document.getElementById("hero-title").classList.add("bug1-active");
-      }
-      // Bug 2: Missing Texture
-      if (!bugsPatched.bug2) {
-        document.getElementById("project-card-2").classList.add("bug2-active");
-      }
-      // Bug 3: T-Pose Icon
-      if (!bugsPatched.bug3) {
-        document.getElementById("bug3-target").classList.add("bug3-active");
-      }
-    }
-
-    function removeAllBugs() {
-      document.getElementById("hero-title").classList.remove("bug1-active");
-      document.getElementById("project-card-2").classList.remove("bug2-active");
-      document.getElementById("bug3-target").classList.remove("bug3-active");
-    }
-
-    // Patch Handlers
     function patchBug1() {
       if (!bugHuntActive || bugsPatched.bug1) return;
-      document.getElementById("hero-title").classList.remove("bug1-active");
       bugsPatched.bug1 = true;
+      document.getElementById("hero-title").classList.remove("bug1-active");
+      alert("🎯 CRITICAL DEFECT REPAIRED: Resolved tracking jitter and element text overlap on title header!");
       updateBugCount();
     }
 
     function patchBug2() {
       if (!bugHuntActive || bugsPatched.bug2) return;
-      document.getElementById("project-card-2").classList.remove("bug2-active");
-      document.getElementById("asset-badge").style.display = "inline-block";
       bugsPatched.bug2 = true;
+      document.body.classList.remove("bug2-active");
+      document.getElementById("asset-badge").style.display = "block";
+      alert("🎯 ASSET ERROR FIXED: Overrode pink error shader fallback. Rendered asset layer successfully!");
       updateBugCount();
     }
 
     function patchBug3() {
       if (!bugHuntActive || bugsPatched.bug3) return;
-      document.getElementById("bug3-target").classList.remove("bug3-active");
       bugsPatched.bug3 = true;
+      document.getElementById("skill-card-bug3").classList.remove("bug3-active");
+      alert("🎯 TRANSFORMATION MATRIX REPAIRED: Reset local identity scale and tool icons to canonical orientation!");
       updateBugCount();
     }
 
-    function closeModalAndScroll() {
+    function closeModal() {
       document.getElementById("victory-modal").classList.remove("show");
-      document.getElementById("contact").scrollIntoView({ behavior: 'smooth' });
+      toggleBugHunt(); // Turn off bug hunt mode upon victory completion
     }
   </script>
 </body>
